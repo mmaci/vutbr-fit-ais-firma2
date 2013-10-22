@@ -26,13 +26,33 @@
 	\setcounter{page}{1}
 	% texty
 	\subsubsection{Neformálna špecifikácia}
-Navrhněte jednoduchý IS malé firmy, která organizuje kursy orientované na programové vybavení osobních počítačů. Kursy probíhají v různých městech v pronajatých místnostech a jsou vypisovány přímo firmou nebo na základě objednávky zákazníka. Systém by měl poskytovat informace o pořádaných kursech, přihlášených účastnících, nákladech, zisku apod.
+Cieľom projektu je navrhnúť jednoduchý informačný systém malej firmy organizujúcej kurzy orientované na programové vybavenie počítačov.
+
+Kurzy prebiehajú v rôznych mestách v prenajatých miestnostiach a sú vypisované priamo firmou alebo ne základe objednávky zákazníka.
+
+Informačný systém má poskytovať informácie o organizovaných kurzoch, ich účastníkoch, nákladoch a zisku. Systém má taktiež umožňovať správu užívateľov a priradiť im ich role, medzi ktoré patria správcovia, lektori a zákazníci.
+
+Zákazníkmi sú ľudia navštevujúci kurzy. Zákazník sa môže prihlásiť na otvorené kurzy. Pred účasťou na kurze zákazník musí uhradiť kurzovné. Po absolvovaní kurzu zákazník obdrží osvedčenie o absolvovaní kurzu.
+
+Lektor vkladá náplň kurzu do informačného systému. Zákazníkom, ktorí absolvovali kurz, udeľuje osvedčenie o absolvovaní kurzu.
+
+Správca spravuje užívateľov a kurzy.
 	\subsubsection{Analýza požiadavkov}
-Z neformálnej šlecifikácie plynú nasledovné požiadavky na systém:
+Z neformálnej špecifikácie plynú nasledovné požiadavky na systém:
 		\begin{itemize}
-			\item lol
+			\item Role užívateľov:
+			\begin{itemize}
+				\item Správca: je špeciálnym aktérom s najväčšími právami. Môže spravovať užívateľov, zobrazovať a modifikovať ľubovolné dáta v systéme.
+				\item Lektor: je aktérom, ktorý vedie kurzy a udeľuje osvedčenie o absolvovaní kurzov.
+				\item Zákazník: reprezentuje aktéra, ktorý sa prihlasuje a odhlasuje z kurzov, uhrádza kurzovné a (ne)dostáva osvedčenie o absolnovaní kurzu.
+			\end{itemize}
+Využitie dedičnosti je výhodné pre správcu, ktorý v sebe zahŕňa práva lektora.
 		\end{itemize}
+Nasledujúci diagram prípadov použitia prehľadne zobrazuje prípady použitia asociované s vyššie uvedenými aktérmi.
+
+TODO: vlozit use case :D
 	\subsubsection{Plán projektu}
+Žeby 2 iterácie? :D
 	\subsubsection{1. iterácia}
 	\subsubsection{2. iterácia}
 \end{document}
