@@ -31,7 +31,7 @@
 	\subsubsection{Neformální specifikace}
 	Cílem projektu je navrhnout jednoduchý informační systém pro firmu organizující kursy orientované na programové vybavení počítačů, který ji umožní spravovat termíny kursů a zpracovávat přihlášky zákazníků.
 	
-	Kursy probíhají v pronajatých prostorech o různých kapacitách za vedení externích lektorů v různé termíny. Systém by tak měl zahrnovat možnost vypisovat kursy a k nim vytvořit prezentační (informační) stránku, ze které zákazník vyčte potřebné informace o kursu. Ke každému kurzu se budou vypisovat termín a termínům přiřazovat cena, místo konání a lektor. Všechny tyto nastavení bude možno nadále i měnit.
+	Kursy probíhají v pronajatých prostorech o různých kapacitách za vedení externích lektorů v různé termíny. Systém by tak měl zahrnovat možnost vypisovat kursy a k nim vytvořit prezentační (informační) stránku, ze které zákazník vyčte potřebné informace o kursu. Ke každému kurzu se budou vypisovat termíny a termínům přiřazovat cena, místo konání a lektor. Všechny tyto nastavení bude možno nadále i měnit.
 	
 	Součástí systému je i rozhraní, které umožní zákazníkům se přihlašovat na termíny. Každá přihláška bude mít jedinečný identifikátor, přes který bude možnost ji dohledat nebo spravovat. Po přihlášení se bude přihláška postupně zpracovávat pomocí daného protokolu mezi zákazníkem a zaměstnancem (přihlášení - potvrzení/odmítnutí - zaplacení - potvrzení platby).
 	
@@ -70,32 +70,46 @@ Nasledujúci diagram prípadov použitia prehľadne zobrazuje prípady použitia
 		\begin{center}
 			\captionsetup{type=figure}
 			\includegraphics[height=17cm]{img/use_case.eps}
-			\captionof{figure}{Diagram prípadov použitia.}
+			\captionof{figure}{Kompletní diagram případů použití.}
 		\end{center}
 	\subsubsection{Plán projektu}
-Žeby 2 iterácie? :D
+	
+Na základě analýzy projektu jsme se rozhodli rozdělit projekt na 4 iterace. V prvních 2 se vytvoří prototypy obsahující drtivou většinu funkcí celého systému. Následně ve 3. iteraci se projekt překlopí již na konečnou implementaci a ve 4. se budou dodělávat funkčnosti usnadňující práci se systémem a zvyšující jeho přehlednost.
+	
+Prototypování po prvních 2 iteracích nám umožní zhodnotit použitelnost systému dříve, než začne být implementována ostrá verze a pomůže ve shodě se zákazníkem.
+	
 	\subsubsection{1. iterácia}
 		\begin{center}
 			\captionsetup{type=figure}
 			\includegraphics[height=17cm]{img/use_case_iter1.eps}
-			\captionof{figure}{Diagram implementovaných prípadov použitia po 1. iterácii.}
+			\captionof{figure}{Diagram implementovaných případů použití po 1. iteraci.}
 		\end{center}
+		
+Prototyp aplikace bude umět základní správu kurzů a termínů - přidávat a uzavírat kurzy a termíny. Zároveň bude umět přidávat přihlášky a vytvářet uživatele.
+	
 	\subsubsection{2. iterácia}
 		\begin{center}
 			\captionsetup{type=figure}
 			\includegraphics[height=17cm]{img/use_case_iter2.eps}
-			\captionof{figure}{Diagram implementovaných prípadov použitia po 2. iterácii.}
-		\end{center}
+			\captionof{figure}{Diagram implementovaných případů použití po 2. iteraci.}
+		\end{center}			
+Ve 2. iteraci se přidá většina zbývajících hlavních funkcí systému. Po přihlášení na kurz bude prototyp již umožňovat potvrdit/odmítnout platbu nebo přihlášku a posílat notifikace nebo upomínky.
+	
 	\subsubsection{3. iterácia}
 		\begin{center}
 			\captionsetup{type=figure}
 			\includegraphics[height=17cm]{img/use_case_iter3.eps}
-			\captionof{figure}{Diagram implementovaných prípadov použitia po 3. iterácii.}
+			\captionof{figure}{Diagram implementovaných případů použití po 3. iteraci.}
 		\end{center}
+		
+Ve 3. iteraci by měl být zákazník spokojený s celkovou funkčností prototypu a ten se začne překlápět na již konečnou implementaci. Zároveň je přidána možnost žádosti o vypsání kursu/termínu a správy vlastní přihlášky.
+	
 	\subsubsection{4. iterácia}
 		\begin{center}
 			\captionsetup{type=figure}
 			\includegraphics[height=17cm]{img/use_case.eps}
-			\captionof{figure}{Diagram implementovaných prípadov použitia po 4. iterácii.}
+			\captionof{figure}{Diagram implementovaných případů použití po 4. iteraci.}
 		\end{center}
+		
+Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná se především o detaily usnadňující práci se systémem, nikoliv už samotnou funkčnost.
 \end{document}
