@@ -25,7 +25,9 @@
 	\pagestyle{plain}
 	\pagenumbering{arabic}
 	\setcounter{page}{1}
-	% texty
+
+		% ----------- neformalni specifikace -----------
+
 	\subsubsection{Neformální specifikace}
 	Cílem projektu je navrhnout jednoduchý informační systém pro firmu organizující kursy orientované na programové vybavení počítačů, který ji umožní spravovat termíny kursů a zpracovávat přihlášky zákazníků.
 	
@@ -37,22 +39,33 @@
 	
 	Zaměstnanec bude moci kdykoliv uzavřít nebo naopak otevřít přihlašování. I po zpracování přihlášky bude možnost měnit její stav, tzn. vyřadit ji z termínu nebo vrátit/zrušit platbu.
 	
+	Zákazníci budou mít možnost zažádat o vypsání konkrétního termínu nebo i kursu. Tato součást systému bude řešena jako komunikační kanál mezi žádajícím a zaměstnancem.
+	
 	Pro snadnou organizaci kurzů se budou jednotlivé termíny kursů zobrazovat v kalendáři, který si budou moci uživatelé systému zobrazit. Úroveň detailu kalendáře bude záviset na konkrétní roli uživatele.
 	
 	Systém bude implementován jako webová aplikace, která bude komunikovat s databázovým serverem. Bude se skládat ze 2 součástí - front-end (přes který se budou přihlašovat zákazníci s důrazem především na přehlednost, jednoduchost a visuální stránku věci)
 a back-end (přes který se budou spravovat přihlášky, termíny, kursy, uživatelé a mj. zde najdeme zde i kalendář).
 
-	\subsubsection{Analýza požiadavkov}
-Z neformálnej špecifikácie plynú nasledovné požiadavky na systém:
+		% ----------- analyza pozadavku -----------
+
+	\subsubsection{Analýza požadavků}
+	Z neformální specifikace plynou následující požadavky:
+	
+	\begin{itemize}
+		\item Aktéři:		
 		\begin{itemize}
-			\item Role užívateľov:
-			\begin{itemize}
-				\item Správca: je špeciálnym aktérom s najväčšími právami. Môže spravovať užívateľov, zobrazovať a modifikovať ľubovolné dáta v systéme.
-				\item Lektor: je aktérom, ktorý vedie kurzy a udeľuje osvedčenie o absolvovaní kurzov.
-				\item Zákazník: reprezentuje aktéra, ktorý sa prihlasuje a odhlasuje z kurzov, uhrádza kurzovné a (ne)dostáva osvedčenie o absolnovaní kurzu.
-			\end{itemize}
-Využitie dedičnosti je výhodné pre správcu, ktorý v sebe zahŕňa práva lektora.
+			\item Uživatel: není přihlášen nebo evidován v systému, má možnost přihlašovat se na termíny kurzů a upravovat svou přihlášku přes její jedinečný identifikátor.
+			\item Lektor: externista, který fyzicky vede kurzy, nemá práva jakkoliv zasahovat do organizace nebo vedení firmy, ale měl by být informován kdy, kde, koho a co vyučovat.
+			\item Zaměstnanec: zaměstnanec firmy, který má na starosti veškerou správu plateb, kursů, termínů. Vypisuje tedy nové kursy a termíny, potvrzuje přihlášky a vykonává tak veškerou administrátorskou činnost spojenou s během firmy.
+			\item Admin: vytváří a spravuje uživatele. Má přístup k citlivým částem informačního systému.
+			\item Čas: reprezentuje autonomní/pravidelné činnosti systému, které se provádějí buď jako reakce na nějakou činnost jednoho z aktérů a nebo pravidelně
 		\end{itemize}
+	Využití vzájemné dědičnosti všech aktérů je výhodné především pro jednoduchost a přehlednost implementace, kdy každý aktér s vyššími právy bude vždy umět o něco více a nebudeme tak muset dělit aplikaci na části, které některý z uživatelů může používat, další ne a naopak, což zvyšuje složitost.
+	\end{itemize}
+		
+		
+		% ----------- use case -----------
+		
 Nasledujúci diagram prípadov použitia prehľadne zobrazuje prípady použitia asociované s vyššie uvedenými aktérmi.
 		\begin{center}
 			\captionsetup{type=figure}
