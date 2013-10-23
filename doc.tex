@@ -26,18 +26,22 @@
 	\pagenumbering{arabic}
 	\setcounter{page}{1}
 	% texty
-	\subsubsection{Neformálna špecifikácia}
-Cieľom projektu je navrhnúť jednoduchý informačný systém malej firmy organizujúcej kurzy orientované na programové vybavenie počítačov.
+	\subsubsection{Neformální specifikace}
+	Cílem projektu je navrhnout jednoduchý informační systém pro firmu organizující kursy orientované na programové vybavení počítačů, který ji umožní spravovat termíny kursů a zpracovávat přihlášky zákazníků.
+	
+	Kursy probíhají v pronajatých prostorech o různých kapacitách za vedení externích lektorů v různé termíny. Systém by tak měl zahrnovat možnost vypisovat kursy a k nim vytvořit prezentační (informační) stránku, ze které zákazník vyčte potřebné informace o kursu. Ke každému kurzu se budou vypisovat termín a termínům přiřazovat cena, místo konání a lektor. Všechny tyto nastavení bude možno nadále i měnit.
+	
+	Součástí systému je i rozhraní, které umožní zákazníkům se přihlašovat na termíny. Každá přihláška bude mít jedinečný identifikátor, přes který bude možnost ji dohledat nebo spravovat. Po přihlášení se bude přihláška postupně zpracovávat pomocí daného protokolu mezi zákazníkem a zaměstnancem (přihlášení - potvrzení/odmítnutí - zaplacení - potvrzení platby).
+	
+	Systém by měl umožňovat správu uživatelů a změnu rolí jednotlivých uživatelů - lektor, zaměstnanec, administrátor. Tuto možnost bude mít pouze administrátor. Zákazníci nebudou mít uživatelské role a v systému budou evidování pomocí svých přihlášek.
+	
+	Zaměstnanec bude moci kdykoliv uzavřít nebo naopak otevřít přihlašování. I po zpracování přihlášky bude možnost měnit její stav, tzn. vyřadit ji z termínu nebo vrátit/zrušit platbu.
+	
+	Pro snadnou organizaci kurzů se budou jednotlivé termíny kursů zobrazovat v kalendáři, který si budou moci uživatelé systému zobrazit. Úroveň detailu kalendáře bude záviset na konkrétní roli uživatele.
+	
+	Systém bude implementován jako webová aplikace, která bude komunikovat s databázovým serverem. Bude se skládat ze 2 součástí - front-end (přes který se budou přihlašovat zákazníci s důrazem především na přehlednost, jednoduchost a visuální stránku věci)
+a back-end (přes který se budou spravovat přihlášky, termíny, kursy, uživatelé a mj. zde najdeme zde i kalendář).
 
-Kurzy prebiehajú v rôznych mestách v prenajatých miestnostiach a sú vypisované priamo firmou alebo ne základe objednávky zákazníka.
-
-Informačný systém má poskytovať informácie o organizovaných kurzoch, ich účastníkoch, nákladoch a zisku. Systém má taktiež umožňovať správu užívateľov a priradiť im ich role, medzi ktoré patria správcovia, lektori a zákazníci.
-
-Zákazníkmi sú ľudia navštevujúci kurzy. Zákazník sa môže prihlásiť na otvorené kurzy. Pred účasťou na kurze zákazník musí uhradiť kurzovné. Po absolvovaní kurzu zákazník obdrží osvedčenie o absolvovaní kurzu.
-
-Lektor vkladá náplň kurzu do informačného systému. Zákazníkom, ktorí absolvovali kurz, udeľuje osvedčenie o absolvovaní kurzu.
-
-Správca spravuje užívateľov a kurzy.
 	\subsubsection{Analýza požiadavkov}
 Z neformálnej špecifikácie plynú nasledovné požiadavky na systém:
 		\begin{itemize}
