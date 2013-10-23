@@ -1,14 +1,15 @@
 % nastavenia prostredia
 \documentclass[12pt,a4paper,titlepage,final]{report}
-\usepackage[slovak]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage[bookmarksopen,colorlinks,plainpages=false,urlcolor=blue,unicode]{hyperref}
-\usepackage{url}
-\usepackage[dvipdf]{graphicx}
+\usepackage[T1, IL2]{fontenc}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{caption}
 \usepackage[top=3cm, left=1cm, right=1cm, text={17cm, 24cm}, ignorefoot]{geometry}
 \usepackage{color}
-\usepackage{amsmath}
-% dokument
+\usepackage{url}
+\usepackage[bookmarksopen,colorlinks,plainpages=false,urlcolor=blue,unicode]{hyperref}
+
 \begin{document}
 	% define
 	\def\authora{Michal Riša}
@@ -49,8 +50,11 @@ Z neformálnej špecifikácie plynú nasledovné požiadavky na systém:
 Využitie dedičnosti je výhodné pre správcu, ktorý v sebe zahŕňa práva lektora.
 		\end{itemize}
 Nasledujúci diagram prípadov použitia prehľadne zobrazuje prípady použitia asociované s vyššie uvedenými aktérmi.
-
-TODO: vlozit use case :D
+		\begin{center}
+			\captionsetup{type=figure}
+			\includegraphics[height=17cm]{img/use_case.eps}
+			\captionof{figure}{Diagram prípadov použitia.}
+		\end{center}
 	\subsubsection{Plán projektu}
 Žeby 2 iterácie? :D
 	\subsubsection{1. iterácia}
