@@ -271,7 +271,7 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
 	\textbf{Popis} & Přihlášení se na konkrétní termín
 	\\ \hline
 	    
-	\textbf{Primární aktéři} & Uživatel
+	\textbf{Primární aktéři} & Uživatel nebo neregistrovaný uživatel, systém
 	\\ \hline
 	
 	\textbf{Sekundární aktéři} & -	   
@@ -283,7 +283,7 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
     \textbf{Následné podmínky} & Vytvořena přihláška na konkrétní kurz
     \\ \hline 
         
-    \textbf{Akce pro spuštění} & Uživatel klikne na tlačítko "Přihlásit"
+    \textbf{Akce pro spuštění} & Uživatel klikne na tlačítko "Přihlásit".
     \\ \hline
     
     \textbf{Hlavní tok} & 1. Uživatel vybere konkrétní kurz 
@@ -308,11 +308,83 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
     \end{tabular}
 \end{center}
 
-\subsection{Přihlášení na termín: uzavření termínu během přihlašování}
+\subsection{Přihlášení na termín: uzavřený termín během přihlašování}
+\begin{center}
+    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \hline
+    \textbf{Název} & Přihlášení na termín: uzavřený termín během přihlašování
+    \\ \hline
+    
+	\textbf{Vytvořeno} & Pavel Macenauer 
+	\\ \hline
+	
+	\textbf{Popis} & Uživatel se chce přihlásit na termín, který je již uzavřen. Tato situace může nastat v případě, že zaměstnanec uzavře přihlašování na kurz ve chvíli, kdy se na něj někdo hlásil.
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Uživatel nebo neregistrovaný uživatel, systém
+	\\ \hline
+	
+	\textbf{Sekundární aktéři} & Zaměstnanec   
+	\\ \hline
+	
+	\textbf{Předpoklady} & 1. Termín kurzu je uzavřen
+    \\ \hline
+    
+    \textbf{Následné podmínky} & 1. Systém uživateli oznámí, že daný termín je již obsazen a není již možno se na něj přihlásit
+	    \newline 2. Systém již nepokračuje dále s podáním přihlášky
+    \\ \hline 
+        
+    \textbf{Akce pro spuštění} & Uživatel podá přihlášku a termín na který se hlásí je již uzavřen.
+    \\ \hline
+    
+    \textbf{Hlavní tok} & 1. Systém zjistí, že daný termín je již uzavřen
+    	\newline 2. Systém přesměruje uživatele zpět na formulář přidání nového termínu a upozorní zaměstnance, že je třeba zvolit jiného lektora nebo jiný čas
+    \\ \hline    
+    
+	\textbf{Frekvence} & Velmi vzácně při podávání přihlášky
+	\\ \hline
+	\end{tabular}
+\end{center}
 
 \subsection{Přihlášení na termín: chyba při odeslání emailu}
-
-\subsection{Přihlášení na termín: identický uživatel a lektor}
+\begin{center}
+    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \hline
+    \textbf{Název} & Přihlášení na termín: chyba při odeslání emailu
+    \\ \hline
+    
+	\textbf{Vytvořeno} & Pavel Macenauer 
+	\\ \hline
+	
+	\textbf{Popis} & Neodešle se potvrzovací email o přijmutí přihlášky
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Systém
+	\\ \hline
+	
+	\textbf{Sekundární aktéři} & Uživatel
+	\\ \hline
+	
+	\textbf{Předpoklady} & 1. Uživatel odešle přihlášku na termín kurzu
+    \\ \hline
+    
+    \textbf{Následné podmínky} & 1. Email se vloží do fronty neodeslaných emailů
+    \\ \hline 
+        
+    \textbf{Akce pro spuštění} & 1. Nenaváže se spojení se SMTP serverem
+    	\newline 2. SMTP server vrátí chybu při odeslání emailu
+    \\ \hline
+    
+    \textbf{Hlavní tok} & 1. Uživatel vyplní formulář a odešle ho
+    	\newline 2. Systém úspěšně validuje přihlášku a přidá ji
+    	\newline 3. Systému se nepodaří odeslat potvrzovací email uživateli
+    	\newline 4. Systém vloží email do fronty neodeslaných emailů
+    \\ \hline    
+    
+	\textbf{Frekvence} & Velmi vzácně při podávání přihlášky
+	\\ \hline
+	\end{tabular}
+\end{center}
 
 \section{Uzavření termínu}
 \begin{center}
