@@ -25,10 +25,14 @@
 	\pagestyle{plain}
 	\pagenumbering{arabic}
 	\setcounter{page}{1}
+	\setcounter{secnumdepth}{-1}
+	
 
 		% ----------- neformalni specifikace -----------
 
-	\subsubsection{Neformální specifikace}
+	\chapter{Analýza}
+	
+	\section{Neformální specifikace}
 	Cílem projektu je navrhnout jednoduchý informační systém pro firmu organizující kursy orientované na programové vybavení počítačů, který ji umožní spravovat termíny kursů a zpracovávat přihlášky zákazníků.
 	
 	Kursy probíhají v pronajatých prostorech o různých kapacitách za vedení externích lektorů v různé termíny. Systém by tak měl zahrnovat možnost vypisovat kursy a k nim vytvořit prezentační (informační) stránku, ze které zákazník vyčte potřebné informace o kursu. Ke každému kurzu se budou vypisovat termíny a termínům přiřazovat cena, místo konání a lektor. Všechny tyto nastavení bude možno nadále i měnit.
@@ -48,11 +52,11 @@ a back-end (přes který se budou spravovat přihlášky, termíny, kursy, uživ
 
 		% ----------- analyza pozadavku -----------
 
-	\subsubsection{Analýza požadavků}
+	\section{Analýza požadavků}
 	Z neformální specifikace plynou následující požadavky:
 	
-	\begin{itemize}
-		\item Aktéři:		
+	\subsection{Aktéři}		
+	
 		\begin{itemize}
 			\item Uživatel: není přihlášen nebo evidován v systému, má možnost přihlašovat se na termíny kurzů a upravovat svou přihlášku přes její jedinečný identifikátor.
 			\item Lektor: externista, který fyzicky vede kurzy, nemá práva jakkoliv zasahovat do organizace nebo vedení firmy, ale měl by být informován kdy, kde, koho a co vyučovat.
@@ -60,19 +64,21 @@ a back-end (přes který se budou spravovat přihlášky, termíny, kursy, uživ
 			\item Admin: vytváří a spravuje uživatele. Má přístup k citlivým částem informačního systému.
 			\item Čas: reprezentuje autonomní/pravidelné činnosti systému, které se provádějí buď jako reakce na nějakou činnost jednoho z aktérů a nebo pravidelně
 		\end{itemize}
+		
 	Využití vzájemné dědičnosti všech aktérů je výhodné především pro jednoduchost a přehlednost implementace, kdy každý aktér s vyššími právy bude vždy umět o něco více a nebudeme tak muset dělit aplikaci na části, které některý z uživatelů může používat, další ne a naopak, což zvyšuje složitost.
-	\end{itemize}
 		
 		
 		% ----------- use case -----------
-		
+	\subsection{Diagram případů použití}
+	
 Nasledujúci diagram prípadov použitia prehľadne zobrazuje prípady použitia asociované s vyššie uvedenými aktérmi.
 		\begin{center}
 			\captionsetup{type=figure}
-			\includegraphics[height=17cm]{img/use_case.eps}
+			\includegraphics[height=14cm]{img/use_case.eps}
 			\captionof{figure}{Kompletní diagram případů použití.}
 		\end{center}
-	\subsubsection{Plán projektu}
+		
+	\subsection{Plán projektu}
 	
 Na základě analýzy projektu jsme se rozhodli rozdělit projekt na 4 iterace. V prvních 2 se vytvoří prototypy obsahující drtivou většinu funkcí celého systému. Následně ve 3. iteraci se projekt překlopí již na konečnou implementaci a ve 4. se budou dodělávat funkčnosti usnadňující práci se systémem a zvyšující jeho přehlednost.
 	
@@ -112,4 +118,73 @@ Ve 3. iteraci by měl být zákazník spokojený s celkovou funkčností prototy
 		\end{center}
 		
 Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná se především o detaily usnadňující práci se systémem, nikoliv už samotnou funkčnost.
+
+
+
+
+
+%------------------- 1. ITERACE ---------------------%
+
+
+
+
+\chapter{Specifikace}
+
+\section{Specifikace případů použití}
+
+\subsection{Přidat termín}
+
+\begin{center}
+    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \hline
+    \textbf{Název} & Přidat termín 
+    \\ \hline
+    
+	\textbf{Vytvořeno} & Pavel Macenauer 
+	\\ \hline
+	
+	\textbf{Popis} & Ke kurzu se vytvoří termín, tj. časový rozsah, kdy bude probíhat výuka daného kurzu. 
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Zaměstnanec
+	\\ \hline
+	
+	\textbf{Sekundární aktéři} & Admin		   
+	\\ \hline
+	
+	\textbf{Předpoklady} & Vybrán existující kurz
+    \\ \hline
+    
+    \textbf{Následné podmínky} & Přidán termín ke kurzu
+    \\ \hline 
+        
+    \textbf{Akce pro spuštění} & Zaměstnanec klikne na tlačítko "Přidat termín" u konkrétního kurzu.
+    \\ \hline
+    
+    \textbf{Hlavní tok} & 1. Zaměstnanec vybere konkrétní kurz 
+    	\newline 2. Zaměstnanec klikne na "Přidat termín" 
+    	\newline 3. Zaměstnanec vyplní formulář a klikne na "Přidat" 
+    	\newline 4. Systém zpracuje formulář a přidá nový termín
+    \\ \hline
+    
+    \textbf{Alternativní toky} & -
+    \\ \hline -
+    
+    \textbf{Vyjímky} & 1. Chybný vstup
+    	\newline 2. Obsazený lektor
+    \\ \hline
+    
+	\textbf{Frekvence} & Několikrát za týden
+	\\ \hline
+	
+	\textbf{Speciální požadavky} & -
+	\\ \hline
+    
+    
+    \end{tabular}
+\end{center}
+	
+	
+
+
 \end{document}
