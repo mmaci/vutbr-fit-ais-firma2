@@ -69,6 +69,8 @@ a back-end (přes který se budou spravovat přihlášky, termíny, kursy, uživ
 		
 		
 		% ----------- use case -----------
+		
+		
 	\subsection{Diagram případů použití}
 	
 Nasledujúci diagram prípadov použitia prehľadne zobrazuje prípady použitia asociované s vyššie uvedenými aktérmi.
@@ -128,12 +130,9 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
 
 
 
-\chapter{Specifikace}
+\chapter{Specifikace případů použití a vyjímek}
 
-\section{Specifikace případů použití}
-
-\subsection{Přidat termín}
-
+\section{Přidat termín}
 \begin{center}
     \begin{tabular}{ | p{4.5cm} | p{13cm} | }
     \hline
@@ -170,7 +169,7 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
     \textbf{Alternativní toky} & -
     \\ \hline -
     
-    \textbf{Vyjímky} & 1. Chybný vstup
+    \textbf{Vyjímky} & 1. Chybné údaje ve formuláři
     	\newline 2. Obsazený lektor
     \\ \hline
     
@@ -179,12 +178,190 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
 	
 	\textbf{Speciální požadavky} & -
 	\\ \hline
+    \end{tabular}
+\end{center}	
+
+\subsection{Přidat termín: chybný vstup}
+\begin{center}
+    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \hline
+    \textbf{Název} & Přidat termín: chybný vstup
+    \\ \hline
     
+	\textbf{Vytvořeno} & Pavel Macenauer 
+	\\ \hline
+	
+	\textbf{Popis} & Uživatel při přihlášení na termín zadal nevalidní údaje, např. nesprávně zadaný email nebo telefonní číslo.
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Zaměstnanec, systém
+	\\ \hline
+	
+	\textbf{Sekundární aktéři} & -	   
+	\\ \hline
+	
+	\textbf{Předpoklady} & 1. Vstup na formuláři nesplňuje validační podmínky
+    \\ \hline
     
+    \textbf{Následné podmínky} & 1. Systém zaměstnanci zobrazí, které údaje je třeba opravit
+	    \newline 2. Systém nepřidává nový termín
+    \\ \hline 
+        
+    \textbf{Akce pro spuštění} & Po kliknutí na tlačítko "Přidat" některý z údajů ve formuláři pro přidání nového termínu nesplňuje validační podmínky
+    \\ \hline
+    
+    \textbf{Hlavní tok} & 1. Systém zkontroluje validační pravidla formuláře
+    	\newline 2. Systém zjistí, že některé validační podmínky nejsou splněny
+    	\newline 3. Systém zaměstnanci zobrazí, které formulářové prvky nesplňují validační pravidla
+    \\ \hline    
+    
+	\textbf{Frekvence} & Často při vkládání termínu
+	\\ \hline
+	\end{tabular}
+\end{center}
+
+\subsection{Přidat termín: obsazený lektor}
+\begin{center}
+    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \hline
+    \textbf{Název} & Přidat termín: obsazený lektor
+    \\ \hline
+    
+	\textbf{Vytvořeno} & Pavel Macenauer 
+	\\ \hline
+	
+	\textbf{Popis} & Zaměstnanec přiřadí k termínu lektora, který již v daný termín vede termín jiného kurzu.
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Zaměstnanec, systém
+	\\ \hline
+	
+	\textbf{Sekundární aktéři} & -	   
+	\\ \hline
+	
+	\textbf{Předpoklady} & 1. Lektor termínu má v daný termín, termín jiného kurzu
+    \\ \hline
+    
+    \textbf{Následné podmínky} & 1. Systém zaměstnanci oznámí že vybraný lektor již nějaký termín má a požádá o výběr jiného lektora
+	    \newline 2. Systém nepřidává nový termín
+    \\ \hline 
+        
+    \textbf{Akce pro spuštění} & Vybraný lektor má v daný termín, termín jiného kurzu
+    \\ \hline
+    
+    \textbf{Hlavní tok} & 1. Systém zjistí, že v zadaný termín má daný lektor termín jiného kurzu
+    	\newline 2. Systém přesměruje uživatele zpět na formulář přidání nového termínu a upozorní zaměstnance, že je třeba zvolit jiného lektora nebo jiný čas
+    \\ \hline    
+    
+	\textbf{Frekvence} & Vzácně při vkládání termínu
+	\\ \hline
+	\end{tabular}
+\end{center}
+
+\section{Přihlášení na termín}
+\begin{center}
+    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \hline
+    \textbf{Název} & Přihlášení na termín 
+    \\ \hline
+    
+	\textbf{Vytvořeno} & Pavel Macenauer 
+	\\ \hline
+	
+	\textbf{Popis} & Přihlášení se na konkrétní termín
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Uživatel
+	\\ \hline
+	
+	\textbf{Sekundární aktéři} & -	   
+	\\ \hline
+	
+	\textbf{Předpoklady} & Vybrán existující kurz
+    \\ \hline
+    
+    \textbf{Následné podmínky} & Vytvořena přihláška na konkrétní kurz
+    \\ \hline 
+        
+    \textbf{Akce pro spuštění} & Uživatel klikne na tlačítko "Přihlásit"
+    \\ \hline
+    
+    \textbf{Hlavní tok} & 1. Uživatel vybere konkrétní kurz 
+    	\newline 2. Uživatel vyplní přihlašovací formulář na kurz a klikne na tlačítko "Přihlásit"
+    	\newline 3. Systém zpracuje formulář na základě vyplněného formuláře a vytvoří přihlášku na kurz
+    \\ \hline
+    
+    \textbf{Alternativní toky} & -
+    \\ \hline -
+    
+    \textbf{Vyjímky} & 1. Chybné údaje ve formuláři
+    	\newline 2. Uzavřený termín
+    	\newline 3. Chyba při poslání potvrzovacího emailu
+    	\newline 4. Stejný uživatel jako lektor
+    \\ \hline
+    
+	\textbf{Frekvence} & Několikrát denně
+	\\ \hline
+	
+	\textbf{Speciální požadavky} & -
+	\\ \hline
     \end{tabular}
 \end{center}
+
+\subsection{Přihlášení na termín: uzavření termínu během přihlašování}
+
+\subsection{Přihlášení na termín: chyba při odeslání emailu}
+
+\subsection{Přihlášení na termín: identický uživatel a lektor}
+
+\section{Uzavření termínu}
+\begin{center}
+    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \hline
+    \textbf{Název} & Uzavření termínu
+    \\ \hline
+    
+	\textbf{Vytvořeno} & Pavel Macenauer 
+	\\ \hline
 	
+	\textbf{Popis} & Uzavření přihlašování na konkrétní termín
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Zaměstnanec
+	\\ \hline
 	
+	\textbf{Sekundární aktéři} & -	   
+	\\ \hline
+	
+	\textbf{Předpoklady} & Vybrán konkrétní termín
+    \\ \hline
+    
+    \textbf{Následné podmínky} & Uzavřeno přihlašování na daný termín
+    \\ \hline 
+        
+    \textbf{Akce pro spuštění} & Uživatel klikne na tlačítko "Uzavřít přihlašování"
+    \\ \hline
+    
+    \textbf{Hlavní tok} & 1. Uživatel vybere řádek s konkrétním termínem a klikne na "Uzavřít přihlašování"
+    	\newline 2. Systém uzavře přihlašování pro daný termín
+    \\ \hline
+    
+    \textbf{Alternativní toky} & -
+    \\ \hline -
+    
+    \textbf{Vyjímky} & 1. Chybné údaje ve formuláři
+    	\newline 2. Uzavřený termín
+    	\newline 3. Chyba při poslání potvrzovacího emailu
+    	\newline 4. Stejný uživatel jako lektor
+    \\ \hline
+    
+	\textbf{Frekvence} & Několikrát týdně
+	\\ \hline
+	
+	\textbf{Speciální požadavky} & -
+	\\ \hline
+    \end{tabular}
+\end{center}
 
 
 \end{document}
