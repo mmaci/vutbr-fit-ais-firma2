@@ -4,11 +4,13 @@
 \usepackage[T1, IL2]{fontenc}
 \usepackage{graphicx}
 \usepackage{epstopdf}
-\usepackage{caption}
+\usepackage[margin=2cm]{caption}
 \usepackage[top=3cm, left=1cm, right=1cm, text={17cm, 24cm}, ignorefoot]{geometry}
 \usepackage{color}
 \usepackage{url}
 \usepackage[bookmarksopen,colorlinks,plainpages=false,urlcolor=blue,unicode]{hyperref}
+\usepackage{setspace}
+\singlespacing
 
 \begin{document}
 	% define
@@ -26,6 +28,7 @@
 	\pagenumbering{arabic}
 	\setcounter{page}{1}
 	\setcounter{secnumdepth}{-1}
+	\setlength{\parindent}{1cm}	
 	
 
 		% ----------- neformalni specifikace -----------
@@ -130,310 +133,441 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
 
 
 
-\chapter{Specifikace případů použití a vyjímek}
-
+\chapter{Specifikace případů použití}
 \section{Přidat termín}
-\begin{center}
+
+V případě, že je již vytvořen kurz, je ke každému kurzu možnost vytvářet libovolný počet termínů. Termínem je myšlen konkrétní běh kurzu, který má daného lektora, probíhá v určitém časovém úseku (i více dní) a na určitém místě.
+
+\begin{table}[h!]
+	\begin{center}
     \begin{tabular}{ | p{4.5cm} | p{13cm} | }
     \hline
     \textbf{Název} & Přidat termín 
     \\ \hline
     
-	\textbf{Vytvořeno} & Pavel Macenauer 
+	\textbf{ID} & UC1
 	\\ \hline
 	
-	\textbf{Popis} & Ke kurzu se vytvoří termín, tj. časový rozsah, kdy bude probíhat výuka daného kurzu. 
+	\textbf{Popis} & Ke danému kurzu se vytvoří termín, tj. časový rozsah, kdy bude probíhat výuka daného kurzu. 
 	\\ \hline
 	    
 	\textbf{Primární aktéři} & Zaměstnanec
 	\\ \hline
 	
-	\textbf{Sekundární aktéři} & Admin		   
-	\\ \hline
-	
 	\textbf{Předpoklady} & Vybrán existující kurz
+    \\ \hline                
+    
+    \textbf{Hlavní tok} & 
+    \begin{enumerate}
+    	\itemsep0em 
+    	\item Zaměstnanec má vybraný konkrétní kurz a zde vybere "Přidat termín"
+	    \item Zaměstnanec vyplní formulář a klikne na "Přidat"  	
+	  	\item Systém ověří správně zadané údaje
+	  	\begin{enumerate}
+		  	\itemsep0em 
+	  		\item Provede se kontrola správně zadaných formátů adresy, termínů začátku a konce, ceny, kapacity
+	  		\item Provede se kontrola údajů na straně serveru
+	  		\begin{enumerate}
+			  	\itemsep0em 
+	  			\item Termín konce nepředbíhá termín začátku
+	  			\item Vybraný lektor nemá v daný termín nějaký jiný kurz
+	  		\end{enumerate}
+		\end{enumerate}
+	    \item Systém přidá nový termín 
+	    \item Systém zaměstnanci oznámí, že byl úspěšně zadán nový termín
+	\end{enumerate}     
     \\ \hline
     
-    \textbf{Následné podmínky} & Přidán termín ke kurzu
+    \textbf{Alternativní toky} & 
+	    Chybný vstup (UC1.1)
+	    \newline Obsazený lektor (UC1.2)
     \\ \hline 
         
-    \textbf{Akce pro spuštění} & Zaměstnanec klikne na tlačítko "Přidat termín" u konkrétního kurzu.
-    \\ \hline
-    
-    \textbf{Hlavní tok} & 1. Zaměstnanec vybere konkrétní kurz 
-    	\newline 2. Zaměstnanec klikne na "Přidat termín" 
-    	\newline 3. Zaměstnanec vyplní formulář a klikne na "Přidat" 
-    	\newline 4. Systém zpracuje formulář a přidá nový termín
-    \\ \hline
-    
-    \textbf{Alternativní toky} & -
-    \\ \hline -
-    
-    \textbf{Vyjímky} & 1. Chybné údaje ve formuláři
-    	\newline 2. Obsazený lektor
-    \\ \hline
+    \textbf{Následné podmínky} & Přidán termín ke kurzu
+    \\ \hline    
     
 	\textbf{Frekvence} & Několikrát za týden
-	\\ \hline
-	
-	\textbf{Speciální požadavky} & -
-	\\ \hline
+	\\ \hline		
     \end{tabular}
-\end{center}	
+	\end{center}	
+	\caption{Specifikace hlavního toku Přidání termínu - UC1}  
+\end{table}
 
-\subsection{Přidat termín: chybný vstup}
-\begin{center}
+\newpage
+
+\subsection{Alternativní tok: Přidat termín - chybný vstup}
+
+\begin{table}[!h]
+	\begin{center}
     \begin{tabular}{ | p{4.5cm} | p{13cm} | }
     \hline
-    \textbf{Název} & Přidat termín: chybný vstup
+    \textbf{Název} & Přidat termín - chybný vstup
     \\ \hline
     
-	\textbf{Vytvořeno} & Pavel Macenauer 
+	\textbf{ID} & UC1.1
 	\\ \hline
 	
-	\textbf{Popis} & Uživatel při přihlášení na termín zadal nevalidní údaje, např. nesprávně zadaný email nebo telefonní číslo.
+	\textbf{Popis} & Systém zaměstnanci oznámí, že zadal nesprávné údaje
 	\\ \hline
 	    
-	\textbf{Primární aktéři} & Zaměstnanec, systém
+	\textbf{Primární aktéři} & Zaměstnanec
 	\\ \hline
 	
-	\textbf{Sekundární aktéři} & -	   
-	\\ \hline
-	
-	\textbf{Předpoklady} & 1. Vstup na formuláři nesplňuje validační podmínky
+	\textbf{Předpoklady} & Zaměstnanec zadal nesprávně některý z údajů: adresa, termín začátku a konce, cena, kapacita
     \\ \hline
     
-    \textbf{Následné podmínky} & 1. Systém zaměstnanci zobrazí, které údaje je třeba opravit
-	    \newline 2. Systém nepřidává nový termín
-    \\ \hline 
-        
-    \textbf{Akce pro spuštění} & Po kliknutí na tlačítko "Přidat" některý z údajů ve formuláři pro přidání nového termínu nesplňuje validační podmínky
-    \\ \hline
-    
-    \textbf{Hlavní tok} & 1. Systém zkontroluje validační pravidla formuláře
-    	\newline 2. Systém zjistí, že některé validační podmínky nejsou splněny
-    	\newline 3. Systém zaměstnanci zobrazí, které formulářové prvky nesplňují validační pravidla
-    \\ \hline    
+    \textbf{Alternativní tok} & 
+    \begin{enumerate}
+        \itemsep0em 
+    	\item Spustí se po kroku 3(a). hlavního toku UC1 (ověření formátu zadaných údajů)
+    	\item Systém zaměstnanci zobrazí, které formulářové prvky nesplňují validační kritéria
+    \end{enumerate}
+    \\ \hline  
     
 	\textbf{Frekvence} & Často při vkládání termínu
 	\\ \hline
 	\end{tabular}
-\end{center}
+		\caption{Specifikace alternativního toku Přídání termínu - UC1.1 při chybném vstupu}	
+	\end{center}
+\end{table}
 
-\subsection{Přidat termín: obsazený lektor}
-\begin{center}
+\subsection{Alternativní tok: Přidat termín - obsazený lektor}
+\begin{table}[!h]	
+	\begin{center}
     \begin{tabular}{ | p{4.5cm} | p{13cm} | }
     \hline
     \textbf{Název} & Přidat termín: obsazený lektor
     \\ \hline
     
-	\textbf{Vytvořeno} & Pavel Macenauer 
+	\textbf{ID} & UC1.2
 	\\ \hline
 	
-	\textbf{Popis} & Zaměstnanec přiřadí k termínu lektora, který již v daný termín vede termín jiného kurzu.
+	\textbf{Popis} & Systém zaměstnanci oznámí, že vybraný lektor je již obsazen
 	\\ \hline
 	    
-	\textbf{Primární aktéři} & Zaměstnanec, systém
+	\textbf{Primární aktéři} & Zaměstnanec
 	\\ \hline
 	
-	\textbf{Sekundární aktéři} & -	   
-	\\ \hline
-	
-	\textbf{Předpoklady} & 1. Lektor termínu má v daný termín, termín jiného kurzu
+	\textbf{Předpoklady} & Lektor má v daný termín, termín jiného kurzu
     \\ \hline
     
-    \textbf{Následné podmínky} & 1. Systém zaměstnanci oznámí že vybraný lektor již nějaký termín má a požádá o výběr jiného lektora
-	    \newline 2. Systém nepřidává nový termín
+    \textbf{Alternativní tok} & 
+    	\begin{enumerate}
+   	        \itemsep0em 
+    		\item Spustí se po kroku 3(b)ii hlavního toku UC2 (ověření termínu a lektora)
+	    	\item Systém přesměruje zaměstnance na předvyplněný formulář
+	    	\item Systém zaměstnanci oznámí ať změní lektora nebo čas
+    	\end{enumerate}
     \\ \hline 
-        
-    \textbf{Akce pro spuštění} & Vybraný lektor má v daný termín, termín jiného kurzu
-    \\ \hline
-    
-    \textbf{Hlavní tok} & 1. Systém zjistí, že v zadaný termín má daný lektor termín jiného kurzu
-    	\newline 2. Systém přesměruje uživatele zpět na formulář přidání nového termínu a upozorní zaměstnance, že je třeba zvolit jiného lektora nebo jiný čas
-    \\ \hline    
-    
+
 	\textbf{Frekvence} & Vzácně při vkládání termínu
 	\\ \hline
-	\end{tabular}
-\end{center}
+	\end{tabular}	
+	\caption{Specifikace alternativního toku Přídání termínu - UC1.2 v případě, že je v daný termín obsazený lektor}	
+	\end{center}
+\end{table}
+
+\newpage
 
 \section{Přihlášení na termín}
+Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé, tak i neregistrovaní uživatelé.
+\begin{table}[!h]
 \begin{center}
     \begin{tabular}{ | p{4.5cm} | p{13cm} | }
     \hline
     \textbf{Název} & Přihlášení na termín 
     \\ \hline
     
-	\textbf{Vytvořeno} & Pavel Macenauer 
+	\textbf{ID} & UC2
 	\\ \hline
 	
-	\textbf{Popis} & Přihlášení se na konkrétní termín
+	\textbf{Popis} & Vytvoří se přihláška na termín daného kurzu
 	\\ \hline
 	    
-	\textbf{Primární aktéři} & Uživatel nebo neregistrovaný uživatel, systém
+	\textbf{Primární aktéři} & Uživatel, neregistrovaný uživatel
 	\\ \hline
 	
-	\textbf{Sekundární aktéři} & -	   
-	\\ \hline
-	
-	\textbf{Předpoklady} & Vybrán existující kurz
+	\textbf{Předpoklady} & 
+	\begin{enumerate}
+		\itemsep0em 	
+		\item Vybrán vypsaný kurz
+		\item Kurz má aspoň 1 vypsaný termín - je zobrazen přihlašovací formulář
+	\end{enumerate}
     \\ \hline
     
-    \textbf{Následné podmínky} & Vytvořena přihláška na konkrétní kurz
-    \\ \hline 
-        
-    \textbf{Akce pro spuštění} & Uživatel klikne na tlačítko "Přihlásit".
+    \textbf{Hlavní tok} & 
+	\begin{enumerate}
+		\itemsep0em 	
+		\item Uživatel vyplní přihlašovací formulář a zvolí "Přihlásit"
+		\item Provede se kontrola správně zadaných formátů a povinných položek: adresa, telefon, email, jméno, příjmení
+		\item Provede se serverová kontrola
+		\begin{enumerate}
+			\itemsep0em 		
+			\item Přihlašování na termín kurzu je otevřeno
+			\item Přihláška již neexistuje - stejné jméno, příjmení a email
+		\end{enumerate}				
+		\item Vytvoří se registrace na daný termín
+		\begin{enumerate}
+			\itemsep0em 		
+			\item Systém zkontroluje, zda-li je uživatel přihlášen
+			\item Pokud ano, přidá k registraci ID uživatele
+		\end{enumerate}				
+		\item Systém na zadaný email odešle potvrzení o úspěšné registrace
+	\end{enumerate}   		
     \\ \hline
     
-    \textbf{Hlavní tok} & 1. Uživatel vybere konkrétní kurz 
-    	\newline 2. Uživatel vyplní přihlašovací formulář na kurz a klikne na tlačítko "Přihlásit"
-    	\newline 3. Systém zpracuje formulář na základě vyplněného formuláře a vytvoří přihlášku na kurz
+    \textbf{Alternativní toky} & 
+	    Chybný vstup (UC2.1)
+	    \newline Uzavřené přihlašování (UC2.2)
+    	\newline Existující přihláška (UC2.3)
+	    \newline Chyba při odeslání potvrzovacího emailu (UC2.4)
     \\ \hline
     
-    \textbf{Alternativní toky} & -
-    \\ \hline -
-    
-    \textbf{Vyjímky} & 1. Chybné údaje ve formuláři
-    	\newline 2. Uzavřený termín
-    	\newline 3. Chyba při poslání potvrzovacího emailu
-    	\newline 4. Stejný uživatel jako lektor
-    \\ \hline
+    \textbf{Následné podmínky} & Vytvořena registrace na daný termín kurzu
+    \\ \hline        
     
 	\textbf{Frekvence} & Několikrát denně
 	\\ \hline
-	
-	\textbf{Speciální požadavky} & -
-	\\ \hline
+		
     \end{tabular}
-\end{center}
+	\caption{Specifikace hlavního toku Přihlášení na termín - UC2}    
+	\end{center}
 
-\subsection{Přihlášení na termín: uzavřený termín během přihlašování}
-\begin{center}
+\end{table}
+
+\newpage
+
+\subsection{Alternativní tok: Přihlášení na termín - chybný vstup}
+
+\begin{table}[!h]
+	\begin{center}
+    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \hline
+    \textbf{Název} & Přihlášení na termín - chybný vstup
+    \\ \hline
+    
+	\textbf{ID} & UC2.1
+	\\ \hline
+	
+	\textbf{Popis} & Systém uživateli oznámí, že zadal nesprávné údaje
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Uživatel, neregistrovaný uživatel
+	\\ \hline
+	
+	\textbf{Předpoklady} & Uživatel nebo neregistrovaný uživatel zadal nesprávně některý z údajů: adresa, telefon, email, jméno, příjmení
+    \\ \hline
+    
+    \textbf{Alternativní tok} & 
+    \vspace{-3.5mm}
+    \begin{enumerate}
+        \itemsep0em 
+    	\item Spustí se po kroku 2. hlavního toku UC2 (ověření formátu zadaných údajů)
+    	\item Systém zaměstnanci zobrazí, které formulářové prvky nesplňují validační kritéria
+    \end{enumerate}
+    \\ \hline              
+    
+	\textbf{Frekvence} & Často při podávání přihlášky
+	\\ \hline
+	\end{tabular}
+		\caption{Alternativní tok Přihlášení na termín - UC2.1 při chybném vstupu}	
+	\end{center}
+
+\end{table}
+
+\subsection{Alternativní tok: Přihlášení na termín - uzavřené přihlašování}
+\begin{table}[!h]
+	\begin{center}
     \begin{tabular}{ | p{4.5cm} | p{13cm} | }
     \hline
     \textbf{Název} & Přihlášení na termín: uzavřený termín během přihlašování
     \\ \hline
     
-	\textbf{Vytvořeno} & Pavel Macenauer 
+	\textbf{ID} & UC2.2
 	\\ \hline
 	
-	\textbf{Popis} & Uživatel se chce přihlásit na termín, který je již uzavřen. Tato situace může nastat v případě, že zaměstnanec uzavře přihlašování na kurz ve chvíli, kdy se na něj někdo hlásil.
+	\textbf{Popis} & Systém uživateli oznámí, že termín je již uzavřen pro přihlašování. Tato situace může nastat v případě, že zaměstnanec uzavře přihlašování na kurz ve chvíli, kdy se na něj někdo hlásil.
 	\\ \hline
 	    
-	\textbf{Primární aktéři} & Uživatel nebo neregistrovaný uživatel, systém
+	\textbf{Primární aktéři} & Uživatel, neregistrovaný uživatel
 	\\ \hline
 	
 	\textbf{Sekundární aktéři} & Zaměstnanec   
 	\\ \hline
 	
-	\textbf{Předpoklady} & 1. Termín kurzu je uzavřen
-    \\ \hline
-    
-    \textbf{Následné podmínky} & 1. Systém uživateli oznámí, že daný termín je již obsazen a není již možno se na něj přihlásit
-	    \newline 2. Systém již nepokračuje dále s podáním přihlášky
-    \\ \hline 
+	\textbf{Předpoklady} & Termín kurzu je uzavřen pro přihlašování
+    \\ \hline    
         
     \textbf{Akce pro spuštění} & Uživatel podá přihlášku a termín na který se hlásí je již uzavřen.
     \\ \hline
     
-    \textbf{Hlavní tok} & 1. Systém zjistí, že daný termín je již uzavřen
-    	\newline 2. Systém přesměruje uživatele zpět na formulář přidání nového termínu a upozorní zaměstnance, že je třeba zvolit jiného lektora nebo jiný čas
+    \textbf{Alternativní tok} & 
+    \vspace{-3.5mm}
+	\begin{enumerate}
+        \itemsep0em 	
+		\item Spustí se po kroku 3(a) UC2 (kontrola, zda-li je otevřeno přihlašování)
+		\item Systém uživatele přesměruje na stránku s daným kurzem
+		\item Systém uživateli oznámí, že daný termín byl právě uzavřen
+		\item Systém vykreslí přihlašovací formulář v případě, že je vypsán aspoň jeden termín
+		\item Uživatel pokračuje krokem 1 UC2 (vyplnění formuláře)
+	\end{enumerate}	     
     \\ \hline    
     
 	\textbf{Frekvence} & Velmi vzácně při podávání přihlášky
 	\\ \hline
 	\end{tabular}
-\end{center}
+		\caption{Alternativní tok Přihlášení na termín - UC2.2 při uzavřeném přihlašování}
+	\end{center}
 
-\subsection{Přihlášení na termín: chyba při odeslání emailu}
+\end{table}
+
+\newpage
+
+\subsection{Alternativní tok: Přihlášení na termín - existující přihláška}
+\begin{table}[!h]
+	\begin{center}
+    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \hline
+    \textbf{Název} & Přihlášení na termín: existující přihláška
+    \\ \hline
+    
+	\textbf{ID} & UC2.3
+	\\ \hline
+	
+	\textbf{Popis} & Systém uživateli oznámí, že přihláška již existuje
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Uživatel, neregistrovaný uživatel
+	\\ \hline
+	
+	
+	\textbf{Předpoklady} & Přihláška obsahující kombinaci jména, příjmení a emailu, která již existuje
+    \\ \hline    
+               
+    \textbf{Alternativní tok} & 
+    \vspace{-3.5mm}
+	\begin{enumerate}
+        \itemsep0em 	
+		\item Spustí se po kroku 3(b) UC2 (kontrola existující přihlášky)
+		\item Systém uživatele přesměruje na stránku s daným kurzem a předvyplněným formulářem
+		\item Systém uživateli oznámí, že přihláška již existuje
+	\end{enumerate}	     
+    \\ \hline    
+    
+	\textbf{Frekvence} & Občas při podávání přihlášky
+	\\ \hline
+	\end{tabular}
+		\caption{Alternativní tok Přihlášení na termín - UC2.3 při již existující registraci}
+	\end{center}
+
+\end{table}
+
+\subsection{Alternativní tok: Přihlášení na termín - chyba při odeslání potvrzovacího emailu}
+\begin{table}[!h]
 \begin{center}
     \begin{tabular}{ | p{4.5cm} | p{13cm} | }
     \hline
-    \textbf{Název} & Přihlášení na termín: chyba při odeslání emailu
+    \textbf{Název} & Přihlášení na termín: chyba při odeslání potvrzovacího emailu
     \\ \hline
     
-	\textbf{Vytvořeno} & Pavel Macenauer 
+	\textbf{ID} & UC2.4
 	\\ \hline
 	
-	\textbf{Popis} & Neodešle se potvrzovací email o přijmutí přihlášky
+	\textbf{Popis} & Dojde k chybě při posílání potvrzovacího emailu
 	\\ \hline
 	    
 	\textbf{Primární aktéři} & Systém
 	\\ \hline
 	
-	\textbf{Sekundární aktéři} & Uživatel
+	\textbf{Sekundární aktéři} & Uživatel, neregistrovaný  uživatel
 	\\ \hline
 	
-	\textbf{Předpoklady} & 1. Uživatel odešle přihlášku na termín kurzu
+	\textbf{Předpoklady} & 
+    \vspace{-3.5mm}
+	\begin{enumerate}
+        \itemsep0em 		
+		\item Přihláška byla úspěšně zpracována
+		\item Systém se pokusí odeslat potvrzovací email o přihlášení na kurz		
+	\end{enumerate}
     \\ \hline
     
-    \textbf{Následné podmínky} & 1. Email se vloží do fronty neodeslaných emailů
+    \textbf{Následné podmínky} & Email se vloží do fronty neodeslaných emailů
     \\ \hline 
-        
-    \textbf{Akce pro spuštění} & 1. Nenaváže se spojení se SMTP serverem
-    	\newline 2. SMTP server vrátí chybu při odeslání emailu
-    \\ \hline
     
-    \textbf{Hlavní tok} & 1. Uživatel vyplní formulář a odešle ho
-    	\newline 2. Systém úspěšně validuje přihlášku a přidá ji
-    	\newline 3. Systému se nepodaří odeslat potvrzovací email uživateli
-    	\newline 4. Systém vloží email do fronty neodeslaných emailů
+    \textbf{Alternativní tok} & 
+
+        \vspace{-3.5mm}  
+		\begin{enumerate}
+	        \itemsep0em 			
+			\item Spustí se po kroku 5 UC2 (odeslání potvrzovacího emailu)
+			\item Systému se nepodaří navázat spojení se SMTP serverem nebo SMTP server vrátí chybu, že se mu nepovedlo odeslat email
+			\item Email se zařadí do fronty neodeslaných emailů
+		\end{enumerate}		       
     \\ \hline    
     
 	\textbf{Frekvence} & Velmi vzácně při podávání přihlášky
 	\\ \hline
 	\end{tabular}
 \end{center}
+	\caption{Alternativní tok Přihlášení na termín - UC2.4 dojde-li na chybu při odesílání potvrzovacího email}
+\end{table}
+
+\newpage
 
 \section{Uzavření termínu}
+
+Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplněna kapacita termínu nebo zaměstnanec tak sám usoudí, může přihlašování na daný termín uzavřít.
+
+
+\begin{table}[!h]
 \begin{center}
     \begin{tabular}{ | p{4.5cm} | p{13cm} | }
     \hline
     \textbf{Název} & Uzavření termínu
     \\ \hline
     
-	\textbf{Vytvořeno} & Pavel Macenauer 
+	\textbf{ID} & UC3
 	\\ \hline
 	
 	\textbf{Popis} & Uzavření přihlašování na konkrétní termín
 	\\ \hline
 	    
 	\textbf{Primární aktéři} & Zaměstnanec
-	\\ \hline
+	\\ \hline	
 	
-	\textbf{Sekundární aktéři} & -	   
-	\\ \hline
-	
-	\textbf{Předpoklady} & Vybrán konkrétní termín
+	\textbf{Předpoklady} & 
+	\begin{enumerate}
+        \itemsep0em 
+		\item Vybrán termín kurzu
+		\item Přihlašování na daný termín je otevřeno
+	\end{enumerate}
+    \\ \hline
+    
+    \textbf{Hlavní tok} & 
+    \begin{enumerate}
+        \itemsep0em     
+    	\item Uživatel vybere "Uzavřít přihlašování" pro daný termín
+    	\item Systém uzavře přihlašování pro daný termín
+    \end{enumerate}
     \\ \hline
     
     \textbf{Následné podmínky} & Uzavřeno přihlašování na daný termín
     \\ \hline 
-        
-    \textbf{Akce pro spuštění} & Uživatel klikne na tlačítko "Uzavřít přihlašování"
-    \\ \hline
     
-    \textbf{Hlavní tok} & 1. Uživatel vybere řádek s konkrétním termínem a klikne na "Uzavřít přihlašování"
-    	\newline 2. Systém uzavře přihlašování pro daný termín
-    \\ \hline
-    
-    \textbf{Alternativní toky} & -
-    \\ \hline -
-    
-    \textbf{Vyjímky} & 1. Chybné údaje ve formuláři
-    	\newline 2. Uzavřený termín
-    	\newline 3. Chyba při poslání potvrzovacího emailu
-    	\newline 4. Stejný uživatel jako lektor
-    \\ \hline
+    \textbf{Alternativní toky} &
+    žádné
+    \\ \hline       
     
 	\textbf{Frekvence} & Několikrát týdně
 	\\ \hline
 	
-	\textbf{Speciální požadavky} & -
-	\\ \hline
     \end{tabular}
 \end{center}
+\caption{Specifikace hlavního toku Užavření termínu - UC3}
+\end{table}
+
+\chapter{Konceptuální diagram tříd}
+
 		% ----------- konceptualny diagram tried -----------
 		\begin{center}
 			\captionsetup{type=figure}
@@ -441,6 +575,8 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
 			\captionof{figure}{Konceptuálny diagram tried po 1. iterácii.}
 		\end{center}
 		% ----------- schema DB -----------
+		
+\chapter{Schéma návrhu databáze}
 
 
 \end{document}
