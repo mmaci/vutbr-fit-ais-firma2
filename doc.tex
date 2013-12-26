@@ -1,40 +1,102 @@
-% nastavenia prostredia
+% ----- formatovani dokumentu -----------------------------------------------
 \documentclass[12pt,a4paper,titlepage,final]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[T1, IL2]{fontenc}
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage[margin=2cm]{caption}
-\usepackage[top=3cm, left=1cm, right=1cm, text={17cm, 24cm}, ignorefoot]{geometry}
+\usepackage[top=3cm, left=2cm, right=2cm, text={17cm, 24cm}, ignorefoot]{geometry}
 \usepackage{color}
 \usepackage{url}
-\usepackage[bookmarksopen,colorlinks,plainpages=false,urlcolor=blue,unicode]{hyperref}
 \usepackage{setspace}
 \singlespacing
-\usepackage[czech]{babel}
+\usepackage[square, numbers]{natbib} 
+\pagestyle{plain}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\setcounter{secnumdepth}{-1}
+\setlength{\parindent}{1cm}	
+\usepackage{natbib}
+
+
+% ----- vyberte jazyk -------------------------------------------------------
+\usepackage[english,czech]{babel}
+%\usepackage[english]{babel}
+
+% ----- dopiste titulky -----------------------------------------------------
+\newcommand\Course{Analýza a návrh informačních systémů}
+\newcommand\WorkTitle{Firma2}
+\newcommand\AuthorA{Michal Riša}
+\newcommand\AuthorAEmail{xrisam01@stud.fit.vutbr.cz}
+\newcommand\AuthorB{Pavel Macenauer}
+\newcommand\AuthorBEmail{xmacen02@stud.fit.vutbr.cz}
+\newcommand\Faculty{Fakulta Informačních Technologií}
+\newcommand\School{Vysoké Učení Technické v Brně}
+
+\usepackage[
+pdftitle={\WorkTitle},
+pdfauthor={\AuthorA, \AuthorB},
+bookmarks=true,
+colorlinks=true,
+breaklinks=true,
+urlcolor=blue,
+citecolor=blue,
+linkcolor=blue,
+unicode=true,
+]
+{hyperref}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------- TITULNÍ STRANA -------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-	% define
-	\def\authora{Michal Riša}
-	\def\authorb{Pavel Macenauer}
-	\def\emaila{xrisam01@stud.fit.vutbr.cz}
-	\def\emailb{xmacen02@stud.fit.vutbr.cz}
-	\def\docname{Firma2}
-	\def\projname{Prvotná analýza a plán projektu}
-	% titulna strana
-	\input{titlepage.tex}
-	% kapitoly
-	\newpage
-	\pagestyle{plain}
-	\pagenumbering{arabic}
-	\setcounter{page}{1}
-	\setcounter{secnumdepth}{-1}
-	\setlength{\parindent}{1cm}	
+	\begin{titlepage}
+	\begin{center}
+		\includegraphics[height=5cm]{img/logo.eps}
+	\end{center}
+	\vfill
+	\begin{center}
+		\begin{Large}
+			\Course\\
+		\end{Large}
+		\bigskip
+		\begin{Huge}
+			\WorkTitle\\
+		\end{Huge}
+	\end{center}
+	\vfill
+	\begin{center}
+		\begin{large}
+			\today
+		\end{large}
+	\end{center}
+	\vfill
+	\begin{flushleft}
+		\begin{large}
+			\begin{tabular}{lll}
+				Autoři: & \AuthorA, & \url{\AuthorAEmail} \\
+				        & \AuthorB, & \url{\AuthorBEmail} \\
+				& & \\
+				& \Faculty \\
+				& \School \\
+			\end{tabular}
+		\end{large}
+	\end{flushleft}
+\end{titlepage}		
 	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------- OBSAH ------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\tableofcontents
 
-		% ----------- neformalni specifikace -----------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%---------------- PRVOTNÍ ANALÝZA -------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-	\chapter{Analýza}
+	\chapter{Prvotní analýza a plán projektu}
 	
 	\section{Neformální specifikace}
 	Cílem projektu je navrhnout jednoduchý informační systém pro firmu organizující kursy orientované na programové vybavení počítačů, který ji umožní spravovat termíny kursů a zpracovávat přihlášky zákazníků.
@@ -54,7 +116,9 @@
 	Systém bude implementován jako webová aplikace, která bude komunikovat s databázovým serverem. Bude se skládat ze 2 součástí - front-end (přes který se budou přihlašovat zákazníci s důrazem především na přehlednost, jednoduchost a visuální stránku věci)
 a back-end (přes který se budou spravovat přihlášky, termíny, kursy, uživatelé a mj. zde najdeme zde i kalendář).
 
-		% ----------- analyza pozadavku -----------
+\newpage
+
+% ----------- analyza pozadavku -----------
 
 	\section{Analýza požadavků}
 	Z neformální specifikace plynou následující požadavky:
@@ -72,9 +136,8 @@ a back-end (přes který se budou spravovat přihlášky, termíny, kursy, uživ
 	Využití vzájemné dědičnosti všech aktérů je výhodné především pro jednoduchost a přehlednost implementace, kdy každý aktér s vyššími právy bude vždy umět o něco více a nebudeme tak muset dělit aplikaci na části, které některý z uživatelů může používat, další ne a naopak, což zvyšuje složitost.
 		
 		
-		% ----------- use case -----------
-		
-		
+% ----------- use case -----------
+				
 	\subsection{Diagram případů použití}
 	
 Nasledujúci diagram prípadov použitia prehľadne zobrazuje prípady použitia asociované s vyššie uvedenými aktérmi.
@@ -128,20 +191,19 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %------------------- 1. ITERACE ---------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\chapter{Modely - 1. iterace}
 
-
-
-\chapter{Specifikace případů použití}
 \section{Přidat termín}
 
 V případě, že je již vytvořen kurz, je ke každému kurzu možnost vytvářet libovolný počet termínů. Termínem je myšlen konkrétní běh kurzu, který má daného lektora, probíhá v určitém časovém úseku (i více dní) a na určitém místě.
 
 \begin{table}[h!]
 	\begin{center}
-    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
     \hline
     \textbf{Název} & Přidat termín 
     \\ \hline
@@ -180,7 +242,7 @@ V případě, že je již vytvořen kurz, je ke každému kurzu možnost vytvá�
 	\end{enumerate}     
     \\ \hline
     
-    \textbf{Alternativní toky} & 
+    \textbf{Výjimky} & 
     \vspace{-3.5mm}
     \begin{enumerate}
 		\itemsep0em 
@@ -201,11 +263,11 @@ V případě, že je již vytvořen kurz, je ke každému kurzu možnost vytvá�
 
 \newpage
 
-\subsection{Alternativní tok: Přidat termín - chybný vstup}
+\subsection{Výjimka: Přidat termín - chybný vstup}
 
 \begin{table}[!h]
 	\begin{center}
-    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
     \hline
     \textbf{Název} & Přidat termín - chybný vstup
     \\ \hline
@@ -238,10 +300,10 @@ V případě, že je již vytvořen kurz, je ke každému kurzu možnost vytvá�
 	\end{center}
 \end{table}
 
-\subsection{Alternativní tok: Přidat termín - obsazený lektor}
+\subsection{Výjimka: Přidat termín - obsazený lektor}
 \begin{table}[!h]	
 	\begin{center}
-    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
     \hline
     \textbf{Název} & Přidat termín: obsazený lektor
     \\ \hline
@@ -281,7 +343,7 @@ V případě, že je již vytvořen kurz, je ke každému kurzu možnost vytvá�
 Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé, tak i neregistrovaní uživatelé.
 \begin{table}[!h]
 \begin{center}
-    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
     \hline
     \textbf{Název} & Přihlášení na termín 
     \\ \hline
@@ -326,7 +388,7 @@ Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé,
 	\end{enumerate}   		
     \\ \hline
     	   
-    \textbf{Alternativní toky} & 
+    \textbf{Výjimky} & 
     \vspace{-3.5mm}
     \begin{enumerate}
 	    \itemsep0em
@@ -352,11 +414,11 @@ Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé,
 
 \newpage
 
-\subsection{Alternativní tok: Přihlášení na termín - chybný vstup}
+\subsection{Výjimka: Přihlášení na termín - chybný vstup}
 
 \begin{table}[!h]
 	\begin{center}
-    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
     \hline
     \textbf{Název} & Přihlášení na termín - chybný vstup
     \\ \hline
@@ -385,15 +447,15 @@ Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé,
 	\textbf{Frekvence} & Často při podávání přihlášky
 	\\ \hline
 	\end{tabular}
-		\caption{Alternativní tok Přihlášení na termín - UC2.1 při chybném vstupu}	
+		\caption{Výjimka Přihlášení na termín - UC2.1 při chybném vstupu}	
 	\end{center}
 
 \end{table}
-
-\subsection{Alternativní tok: Přihlášení na termín - uzavřené přihlašování}
+\vspace{-0.5cm}
+\subsection{Výjimka: Přihlášení na termín - uzavřené přihlašování}
 \begin{table}[!h]
 	\begin{center}
-    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
     \hline
     \textbf{Název} & Přihlášení na termín: uzavřený termín během přihlašování
     \\ \hline
@@ -431,17 +493,17 @@ Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé,
 	\textbf{Frekvence} & Velmi vzácně při podávání přihlášky
 	\\ \hline
 	\end{tabular}
-		\caption{Alternativní tok Přihlášení na termín - UC2.2 při uzavřeném přihlašování}
+		\caption{Výjimka Přihlášení na termín - UC2.2 při uzavřeném přihlašování}
 	\end{center}
 
 \end{table}
 
 \newpage
 
-\subsection{Alternativní tok: Přihlášení na termín - existující přihláška}
+\subsection{Výjimka: Přihlášení na termín - existující přihláška}
 \begin{table}[!h]
 	\begin{center}
-    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
     \hline
     \textbf{Název} & Přihlášení na termín: existující přihláška
     \\ \hline
@@ -472,15 +534,15 @@ Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé,
 	\textbf{Frekvence} & Občas při podávání přihlášky
 	\\ \hline
 	\end{tabular}
-		\caption{Alternativní tok Přihlášení na termín - UC2.3 při již existující registraci}
+		\caption{Výjimka Přihlášení na termín - UC2.3 při již existující registraci}
 	\end{center}
 
 \end{table}
-
-\subsection{Alternativní tok: Přihlášení na termín - chyba při odeslání potvrzovacího emailu}
+\vspace{-0.5cm}
+\subsection{Výjimka: Přihlášení na termín - chyba při odeslání potvrzovacího emailu}
 \begin{table}[!h]
 \begin{center}
-    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
     \hline
     \textbf{Název} & Přihlášení na termín: chyba při odeslání potvrzovacího emailu
     \\ \hline
@@ -524,7 +586,7 @@ Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé,
 	\\ \hline
 	\end{tabular}
 \end{center}
-	\caption{Alternativní tok Přihlášení na termín - UC2.4 dojde-li na chybu při odesílání potvrzovacího email}
+	\caption{Výjimka Přihlášení na termín - UC2.4 dojde-li na chybu při odesílání potvrzovacího email}
 \end{table}
 
 \newpage
@@ -536,7 +598,7 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 
 \begin{table}[!h]
 \begin{center}
-    \begin{tabular}{ | p{4.5cm} | p{13cm} | }
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
     \hline
     \textbf{Název} & Uzavření termínu
     \\ \hline
@@ -571,7 +633,7 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
     \textbf{Následné podmínky} & Uzavřeno přihlašování na daný termín
     \\ \hline 
     
-    \textbf{Alternativní toky} &
+    \textbf{Výjimky} &
     žádné
     \\ \hline       
     
@@ -583,7 +645,7 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 \caption{Specifikace hlavního toku Užavření termínu - UC3}
 \end{table}
 
-\chapter{Konceptuální diagram tříd}
+\section{Konceptuální diagram tříd}
 
 		% ----------- konceptualny diagram tried -----------
 		\begin{center}
@@ -591,42 +653,71 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 			\includegraphics[height=17cm]{img/konceptualny_diagram_tried.eps}
 			\captionof{figure}{Konceptuálny diagram tried po 1. iterácii.}
 		\end{center}
-
 		
-\chapter{Schéma návrhu databáze}
+	
+		\section{Schéma návrhu databáze}
 		% ----------- schema DB -----------
 		\begin{center}
 			\captionsetup{type=figure}
 			\includegraphics[height=12cm]{img/schema_db.eps}
 			\captionof{figure}{Databázová schéma po 1. iterácii.}
 		\end{center}
-
-\chapter{Architektura}
+		
+\newpage		
+		
 		% ----------- architektura  -----------
+		\section{Architektura}
+
+		TODO: důvody pro zvolení dané architektury
+		
 		\begin{center}
 			\captionsetup{type=figure}
 			\includegraphics[height=18cm]{img/architektura.pdf}
 			\captionof{figure}{Návrh architektury aplikace}
 		\end{center}
 		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------- VÝSLEDNÉ MODELY ------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+
+
+\chapter{Výsledné modely analýzy a návrhu}
+
+\section{Finální diagram tříd}
+		
 		\begin{center}
 			\captionsetup{type=figure}
-			\includegraphics[height=20cm]{img/architektura-detail.pdf}
+			\includegraphics[height=19cm]{img/architektura-detail.pdf}
 			\captionof{figure}{Návrh diagramu tříd}
 		\end{center}
-		
-\chapter{Interakce mezi obrazovkami}
+
 		% ----------- interakce  -----------
+		
+\section{Diagramy sekvence}
+
+TODO
+		
+\section{Interakce mezi obrazovkami}
+
+	TODO: vysvětlení rozhraní FrontEnd a BackEnd
+
 		\begin{center}
 			\captionsetup{type=figure}
-			\includegraphics[height=18cm]{img/backend-obr.pdf}
+			\includegraphics[width=17cm]{img/backend-obr.pdf}
 			\captionof{figure}{Interakce mezi obrazovkami - Back End / Administrační rozhraní}
 		\end{center}
 		
 		\begin{center}
 			\captionsetup{type=figure}
-			\includegraphics[height=18cm]{img/frontend-obr.pdf}
+			\includegraphics[width=17cm]{img/frontend-obr.pdf}
 			\captionof{figure}{Interakce mezi obrazovkami - Front End / Klientská část}
 		\end{center}
+		
+		
+\section{Přejímací testy}
+
+TODO
 
 \end{document}
+
+
