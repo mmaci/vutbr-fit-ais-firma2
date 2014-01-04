@@ -666,15 +666,16 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 \newpage		
 		
 		% ----------- architektura  -----------
-		\section{Architektura}
-
-		TODO: důvody pro zvolení dané architektury
+		\section{Architektura}		
 		
 		\begin{center}
 			\captionsetup{type=figure}
 			\includegraphics[height=18cm]{img/architektura.pdf}
 			\captionof{figure}{Návrh architektury aplikace}
 		\end{center}
+		
+		\paragraph{Poznámka:}
+		HTTP požadavek je zpracováván Controllerem, který na jeho základě komunikuje s modelem a upravuje view.
 		
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %----------------- VÝSLEDNÉ MODELY ------------------%
@@ -699,19 +700,23 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 		
 \section{Interakce mezi obrazovkami}
 
-% TODO: vysvětlení rozhraní FrontEnd a BackEnd
+\paragraph{Front End} je rozhraní se kterým můžou interagovat všichni uživatelé, ať už jsou registrovaní nebo ne a všichni ho vidí stejně. Slouží především pro prezentaci kurzů a registraci na jednotlivé termíny.
 
-		\begin{center}
-			\captionsetup{type=figure}
-			\includegraphics[width=17cm]{img/backend-obr.pdf}
-			\captionof{figure}{Interakce mezi obrazovkami - Back End / Administrační rozhraní}
-		\end{center}
+\begin{center}
+	\captionsetup{type=figure}
+	\includegraphics[width=17cm]{img/frontend-obr.pdf}
+	\captionof{figure}{Interakce mezi obrazovkami - Front End / Klientská část}
+\end{center}
+
+\paragraph{Back End} je rozhraní se kterým můžou interagovat pouze Zaměstnanci a Adminové. Slouží ke správě termínů, kurzů a další administrační činnosti.
+
+\begin{center}
+	\captionsetup{type=figure}
+	\includegraphics[width=17cm]{img/backend-obr.pdf}
+	\captionof{figure}{Interakce mezi obrazovkami - Back End / Administrační rozhraní}
+\end{center}
 		
-		\begin{center}
-			\captionsetup{type=figure}
-			\includegraphics[width=17cm]{img/frontend-obr.pdf}
-			\captionof{figure}{Interakce mezi obrazovkami - Front End / Klientská část}
-		\end{center}
+		
 		
 
 
