@@ -6,7 +6,7 @@
 \usepackage{epstopdf}
 \usepackage[margin=2cm]{caption}
 \usepackage[top=3cm, left=2cm, right=2cm, text={17cm, 24cm}, ignorefoot]{geometry}
-\usepackage{color}
+\usepackage[usenames,dvipsnames]{color}
 \usepackage{url}
 \usepackage{setspace}
 \singlespacing
@@ -695,11 +695,11 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 		
 \section{Diagramy sekvence}
 
-TODO
+% TODO
 		
 \section{Interakce mezi obrazovkami}
 
-	TODO: vysvětlení rozhraní FrontEnd a BackEnd
+% TODO: vysvětlení rozhraní FrontEnd a BackEnd
 
 		\begin{center}
 			\captionsetup{type=figure}
@@ -713,10 +713,95 @@ TODO
 			\captionof{figure}{Interakce mezi obrazovkami - Front End / Klientská část}
 		\end{center}
 		
-		
+
+
+% ----------------- prejimaci testy ----------------- %
+	
 \section{Přejímací testy}
 
-TODO
+% ----------------- prihlaska na termin ----------------- %
+
+\subsection{Přihláška na termín kurzu}
+
+\paragraph{Popis}
+
+Uživatel se přihlásí na konkrétní termín nějakého kurzu.
+
+\paragraph{Předpoklady}
+
+\begin{itemize}
+	\item V databázi je uložen aspoň jeden kurz a k němu aspoň jeden termín
+\end{itemize}
+
+\paragraph{Postup}
+\begin{enumerate}
+	\item Uživatel zvolí detail kurzu (ze Seznamu kurzů nebo z Homepage)
+	\item Uživatel vyplní registrační formulář a potvrdí registraci kliknutím na tlačítko
+	\item Možné reakce:
+	\begin{enumerate}
+		\item \textcolor{LimeGreen}{Úspěch} - systém zaznamená registraci (uloží do databáze) a odešle potvrzovací email o přijetí registrace
+		\item \textcolor{LimeGreen}{Úspěch} - systém zaznamená registraci (uloží do databáze), ale nepovede se odeslat potvrzovací email (email je uložen do fronty k odeslání)
+		\item \textcolor{Red}{Chyba} - chybný vstup - systém označí chybný vstup
+		\item \textcolor{Red}{Chyba} - uzavřené přihlašování - systém uživatele upozorní, že je přihlašování již uzavřené a přesměruje ho na tu samou stránku (zmizí přihlašovací formulář)
+		\item \textcolor{Red}{Chyba} - existující přihláška (shoda jména, příjmení a emailu)
+	\end{enumerate}
+	\item Uživatel zkontroluje jím zadaný email, zda-li mu přišla potvrzovací zpráva o přijetí registrace
+\end{enumerate}
+
+% ----------------- vypsani noveho kurzu ----------------- %
+
+\subsection{Vypsání nového kurzu}
+
+\paragraph{Popis}
+
+Uživatel (Zaměstnanec nebo Admin) přidá nový kurz.
+
+\paragraph{Předpoklady}
+
+\begin{itemize}
+	\item Uživatel je přihlášen a má práva Zaměstnance nebo Admina
+\end{itemize}
+
+\paragraph{Postup}
+
+\begin{enumerate}
+	\item Uživatel zvolí "Přidat kurz" na obrazovce Seznamu kurzů
+	\item Uživatel vyplní formulář a potvrdí jeho odeslání kliknutím na tlačítko
+	\item Možné reakce:
+	\begin{enumerate}
+		\item \textcolor{LimeGreen}{Úspěch} - systém přidá nový kurz do databáze, oznámí uživateli, že byl nový kurz úspěšně přidán a přesměruje ho na seznam kurzů
+		\item \textcolor{Red}{Chyba} - chybný vstup - systém označí chybný vstup
+	\end{enumerate}	
+\end{enumerate}
+
+
+% ----------------- vypsani noveho terminu ----------------- %
+
+\subsection{Vypsání nového termínu}
+
+\paragraph{Popis}
+
+Uživatel (Zaměstnanec nebo Admin) přidá nový termín pro daný kurz.
+
+\paragraph{Předpoklady}
+
+\begin{itemize}
+	\item V databázi je uložen aspoň jeden kurz
+	\item Uživatel je přihlášen a má práva Zaměstnance nebo Admina
+\end{itemize}
+
+\paragraph{Postup}
+
+\begin{enumerate}
+	\item Uživatel zvolí "Přidat termín" ze Seznamu termínu nebo Seznamu kurzů
+	\item Uživatel vyplní formulář a potvrdí jeho odeslání kliknutím na tlačítko
+	\item Možné reakce:
+	\begin{enumerate}
+		\item \textcolor{LimeGreen}{Úspěch} - systém přidá nový termín do databáze, oznámí uživateli, že byl nový termín úspěšně přidán a přesměruje ho na seznam termínů
+		\item \textcolor{Red}{Chyba} - chybný vstup - systém označí chybný vstup
+		\item \textcolor{Red}{Chyba} - obsazený lektor - systém upozorní uživatele, že daný lektor je již obsazený
+	\end{enumerate}
+\end{enumerate}
 
 \end{document}
 
