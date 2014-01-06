@@ -689,8 +689,202 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 		\begin{center}
 			\captionsetup{type=figure}
 			\includegraphics[height=19cm]{img/architektura-detail.pdf}
-			\captionof{figure}{Návrh diagramu tříd}
+			\captionof{figure}{Návrh finálního diagramu tříd}
 		\end{center}
+		
+\section{Poslat upomínku za neuhrazenou platbu}
+\begin{table}[h!]
+	\begin{center}
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
+    \hline
+    \textbf{Název} & Poslat upomínku za neuhrazenou platbu
+    \\ \hline
+    
+	\textbf{ID} & UC4
+	\\ \hline
+	
+	\textbf{Popis} & Pravidelně se zkontrolují nezaplacené přihlášky a rozešlou se upomínky k zaplacení
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Systém
+	\\ \hline
+	
+	\textbf{Předpoklady} & -
+    \\ \hline                
+    
+    \textbf{Hlavní tok} &
+    \vspace{-3.5mm}    
+    \begin{enumerate}
+    	\itemsep0em 
+    	\item Systém zkontroluje všechny nezaplacené přihlášky na kurzy probíhající od aktuálního data do budoucnosti
+    	\item Zkontroluje se počet již odeslaných upomínek
+	    \item Vypočte se časový rozdíl mezi datem přihlášky a aktuálním časem
+	    \begin{enumerate}
+	    	\item Pokuď časový rozdíl je větší než hodnota N1 uvedená v konfiguraci (počet dní) pro 1. upomínku a ta ještě nebyla odeslána, pošle se 1. upomínka
+	    	\item Pokuď časový rozdíl je větší než hodnota N2 uvedená v konfiguraci (počet dní) pro 2. upomínku a ta ještě nebyla odeslána, pošle se 2. upomínka
+   		    \item Pokuď časový rozdíl je větší než hodnota N3 uvedená v konfiguraci (počet dní) pro zaslání upozornění administrátorovi o návrhu na vyřazení a již uplynulo více, než D dní (konfigurace) od odeslání posledního upozornění na upozorňovací email E (konfigurace), pošle se upomínka
+   		    \begin{enumerate}
+   		    	\item Registrace se v databázi označí jako navržená k vyřazení
+   		    \end{enumerate}
+	    \end{enumerate}
+	    \item Zaznamená se odeslání upomínky	 
+	\end{enumerate}     
+    \\ \hline
+    
+    \textbf{Výjimky} & 
+    \vspace{-3.5mm}
+    \begin{enumerate}
+		\itemsep0em 
+		\item Chyba při odeslání emailu (UC4.1)
+	\end{enumerate}
+    \\ \hline 
+        
+    \textbf{Následné podmínky} & Upomínka odeslána
+    \\ \hline    
+    
+	\textbf{Frekvence} & Každý den
+	\\ \hline		
+    \end{tabular}
+	\end{center}	
+	\caption{Specifikace hlavního toku Posílání upomínek o nezaplacení - UC4}  
+\end{table}
+
+
+
+\section{Potvrzení/odmítnutí/vyřazení přihlášky/platby}
+
+V seznamu registrací je možné přecházet mezi jednotlivými stavy po kliknutí na příslušná tlačítka. Např. registraci ve stavu \verb|POTVRZENA| můžeme po kliknutí na tlačítko "vyřadit" změnit na \verb|VYRAZENA| nebo po kliknutí na "potvrdit platbu" na \verb|ZAPLACENA|. Nejlépe vše popisuje následující stavový diagram.
+
+\begin{center}
+	\captionsetup{type=figure}
+	\includegraphics{img/prihlaska-stavy.png}
+	\captionof{figure}{Stavy přihlášky}
+\end{center}
+
+\begin{table}[h!]
+	\begin{center}
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
+    \hline
+    \textbf{Název} & Potvrzení/Odmítnutí/Vyřazení přihlášky
+    \\ \hline
+    
+	\textbf{ID} & UC5
+	\\ \hline
+	
+	\textbf{Popis} & V seznamu registrací je možné přecházet mezi stavy jednotlivých registrací. Nejlépe vše popisuje výše přiložený stavový diagram.
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Zaměstnanec, Admin
+	\\ \hline
+	
+	\textbf{Předpoklady} & 
+	\vspace{-3.5mm}  
+	\begin{enumerate}
+		\itemsep0em
+		\item Uživatel přihlášen jako Zaměstnanec nebo Admin
+	\end{enumerate}
+    \\ \hline                
+    
+    \textbf{Hlavní tok} &
+    \vspace{-3.5mm}    
+    \begin{enumerate}
+    	\itemsep0em 
+    	\item Uživatel klikne na příslušné tlačítko (viz. název přechodu ve stavovém diagramu)
+    	\item Systém změní stav přihlášky
+    	\item Systém pošle upozornění na email zadaný u registrace 
+	\end{enumerate}     
+    \\ \hline
+    
+    \textbf{Výjimky} & 
+    \vspace{-3.5mm}
+    \begin{enumerate}
+		\itemsep0em 
+		\item Chyba při odeslání emailu (UC4.1)
+	\end{enumerate}
+    \\ \hline 
+        
+    \textbf{Následné podmínky} & Stav registrace změněn
+    \\ \hline    
+    
+	\textbf{Frekvence} & Každý den
+	\\ \hline		
+    \end{tabular}
+	\end{center}	
+	\caption{Specifikace hlavního toku při změně stavu registrace - UC4}  
+\end{table}
+
+Potvrzení platby je specifické tím, že krom změny stavu se ještě eviduje platba.
+
+\begin{table}[h!]
+	\begin{center}
+    \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
+    \hline
+    \textbf{Název} & Potvrzení platby
+    \\ \hline
+    
+	\textbf{ID} & UC6
+	\\ \hline
+	
+	\textbf{Popis} & Potvrzení platby. Kurz může být zaplacen celý a nebo jen z části.
+	\\ \hline
+	    
+	\textbf{Primární aktéři} & Zaměstnanec, Systém
+	\\ \hline
+	
+	\textbf{Předpoklady} & 
+    \vspace{-3.5mm} 	
+	\begin{enumerate}
+		\itemsep0em
+		\item Uživatel přihlášen jako Zaměstnanec nebo Admin
+		\item Registrace je ve stavu \verb|POTVRZENA|
+	\end{enumerate}
+    \\ \hline            
+    
+    \textbf{Hlavní tok} &
+    \vspace{-3.5mm}    
+    \begin{enumerate}
+    	\itemsep0em 
+    	\item Uživatel klikne na tlačítko "Potvrdit platbu"
+    	\item Systém vyvolá modální okno s formulářem pro evidenci platby
+    	\item Uživatel vyplní formulář a odešlo ho
+		\item Systém vloží platbu do databáze 	
+		\begin{enumerate}
+			\itemsep0em 		
+			\item Platba je částečná
+			\begin{enumerate}
+				\itemsep0em 					
+				\item Systém odečte platbu od celkové ceny registrace
+			\end{enumerate}
+			\item Platba je celá nebo se jedná o zbytek celkové ceny
+			\begin{enumerate}
+				\itemsep0em 			
+				\item Systém odečte platbu od celkové ceny registrace
+				\item Systém změní stav registrace na \verb|ZAPLACENA|
+			\end{enumerate}
+	    \end{enumerate}
+    	\item Systém pošle upozornění na email zadaný u registrace 	 
+	\end{enumerate}     
+    \\ \hline
+    
+    \textbf{Výjimky} & 
+    \vspace{-3.5mm}
+    \begin{enumerate}
+		\itemsep0em 
+		\item Chyba při odeslání emailu (UC5.1)
+		\item Platba je větší, než-li zbývající částka (UC6.1)
+	\end{enumerate}
+    \\ \hline 
+        
+    \textbf{Následné podmínky} & Upomínka odeslána
+    \\ \hline    
+    
+	\textbf{Frekvence} & Každý den
+	\\ \hline		
+    \end{tabular}
+	\end{center}	
+	\caption{Specifikace hlavního toku Posílání upomínek o nezaplacení - UC4}  
+\end{table}
+
 
 		% ----------- interakce  -----------
 		
