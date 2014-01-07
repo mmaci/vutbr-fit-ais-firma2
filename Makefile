@@ -1,7 +1,7 @@
 NOOUT=1>/dev/null 2>&1
 PDFVIEWER=atril
 
-.PHONY: clean doc.pdf view edit clean git_clone git_push
+.PHONY: clean view edit clean git_clone git_push
 
 all: doc.pdf
 
