@@ -16,7 +16,7 @@ edit:
 	gedit *.tex $(NOOUT) &
 
 clean:
-	rm -f *.log *.blg *.bbl *.toc *.aux *.out *.lot *.lof img/*.pdf *.dvi
+	rm -f *.log *.blg *.bbl *.toc *.aux *.out *.lot *.lof img/*converted-to.pdf *.dvi
 
 git_clone:
 	git clone https://github.com/mmaci/vutbr-ais-firma2.git
