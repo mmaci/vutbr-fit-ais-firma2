@@ -197,7 +197,7 @@ Ve 4. iteraci se implementuje kalendář a evidence vrácených plateb. Jedná s
 
 \chapter{Modely - 1. iterace}
 
-\section{Přidat termín}
+\section{UC1: Přidat termín}
 
 V případě, že je již vytvořen kurz, je ke každému kurzu možnost vytvářet libovolný počet termínů. Termínem je myšlen konkrétní běh kurzu, který má daného lektora, probíhá v určitém časovém úseku (i více dní) a na určitém místě.
 
@@ -339,7 +339,7 @@ V případě, že je již vytvořen kurz, je ke každému kurzu možnost vytvá�
 
 \newpage
 
-\section{Přihlášení na termín}
+\section{UC2: Přihlášení na termín}
 Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé, tak i neregistrovaní uživatelé.
 \begin{table}[!h]
 \begin{center}
@@ -591,7 +591,7 @@ Je-li k danému kurzu vypsán termín, mohou se na něj hlásit jak uživatelé,
 
 \newpage
 
-\section{Uzavření termínu}
+\section{UC3: Uzavření termínu}
 
 Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplněna kapacita termínu nebo zaměstnanec tak sám usoudí, může přihlašování na daný termín uzavřít.
 
@@ -661,38 +661,27 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 			\captionsetup{type=figure}
 			\includegraphics[height=12cm]{img/schema_db.eps}
 			\captionof{figure}{Databázová schéma po 1. iterácii.}
-		\end{center}
-		
-\newpage		
+		\end{center}				
 		
 		% ----------- architektura  -----------
-		\section{Architektura}		
-		
+		\section{Návrh architektury}				
 		\begin{center}
 			\captionsetup{type=figure}
-			\includegraphics[height=18cm]{img/architektura.pdf}
+			\includegraphics[width=18cm]{img/architektura-navrh.pdf}
 			\captionof{figure}{Návrh architektury aplikace}
 		\end{center}
 		
 		\paragraph{Poznámka:}
-		HTTP požadavek je zpracováván Controllerem, který na jeho základě komunikuje s modelem a upravuje view.
+		HTTP požadavek je zpracováván Controllerem, který na jeho základě komunikuje s modelem a upravuje view.		
+
 		
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %----------------- VÝSLEDNÉ MODELY ------------------%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
 
-
-\chapter{Výsledné modely analýzy a návrhu}
-
-\section{Finální diagram tříd}
-		
-		\begin{center}
-			\captionsetup{type=figure}
-			\includegraphics[height=19cm]{img/architektura-detail.pdf}
-			\captionof{figure}{Návrh finálního diagramu tříd}
-		\end{center}
-		
-\section{Poslat upomínku za neuhrazenou platbu}
+\chapter{Výsledné modely analýzy a návrhu} 
+\vspace{-0.5cm}
+\section{UC4: Poslat upomínku za neuhrazenou platbu}
 \begin{table}[h!]
 	\begin{center}
     \begin{tabular}{ | p{4.2cm} | p{12.2cm} | }
@@ -703,7 +692,7 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 	\textbf{ID} & UC4
 	\\ \hline
 	
-	\textbf{Popis} & Pravidelně se zkontrolují nezaplacené přihlášky a rozešlou se upomínky k zaplacení
+	\textbf{Popis} & Zkontrolují se nezaplacené přihlášky a rozešlou se upomínky
 	\\ \hline
 	    
 	\textbf{Primární aktéři} & Systém
@@ -720,10 +709,12 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
     	\item Zkontroluje se počet již odeslaných upomínek
 	    \item Vypočte se časový rozdíl mezi datem přihlášky a aktuálním časem
 	    \begin{enumerate}
-	    	\item Pokuď časový rozdíl je větší než hodnota N1 uvedená v konfiguraci (počet dní) pro 1. upomínku a ta ještě nebyla odeslána, pošle se 1. upomínka
-	    	\item Pokuď časový rozdíl je větší než hodnota N2 uvedená v konfiguraci (počet dní) pro 2. upomínku a ta ještě nebyla odeslána, pošle se 2. upomínka
-   		    \item Pokuď časový rozdíl je větší než hodnota N3 uvedená v konfiguraci (počet dní) pro zaslání upozornění administrátorovi o návrhu na vyřazení a již uplynulo více, než D dní (konfigurace) od odeslání posledního upozornění na upozorňovací email E (konfigurace), pošle se upomínka
+		    \itemsep0em
+	    	\item Pokud časový rozdíl je větší než počet dní uveden v konfiguraci pro 1. upomínku a ta ještě nebyla odeslána, pošle se 1. upomínka
+	    	\item Pokud časový rozdíl je větší než počet dní uveden v konfiguraci pro 2. upomínku a ta ještě nebyla odeslána, pošle se 2. upomínka
+   		    \item Na základě nastavení v konfiguraci. Pokud je časový rozdíl větší, než počet dní pro zaslání návrhu na vyřazení a již uplynul dostatečný počet dní od posledního zaslání, pošle se email s návrhem na vyřazení na daný email
    		    \begin{enumerate}
+	   		    \itemsep0em
    		    	\item Registrace se v databázi označí jako navržená k vyřazení
    		    \end{enumerate}
 	    \end{enumerate}
@@ -735,7 +726,7 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
     \vspace{-3.5mm}
     \begin{enumerate}
 		\itemsep0em 
-		\item Chyba při odeslání emailu (UC4.1)
+		\item Chyba při odeslání emailu
 	\end{enumerate}
     \\ \hline 
         
@@ -746,18 +737,20 @@ Zaměstnanec může uzavírat a otevírat termíny. V případě, že je naplně
 	\\ \hline		
     \end{tabular}
 	\end{center}	
-	\caption{Specifikace hlavního toku Posílání upomínek o nezaplacení - UC4}  
+	\caption{Specifikace hlavního toku Posílání upomínek - UC4}  
 \end{table}
 
+\newpage
 
 
-\section{Potvrzení/odmítnutí/vyřazení přihlášky/platby}
+
+\section{UC5: Potvrzení/odmítnutí/vyřazení přihlášky/platby}
 
 V seznamu registrací je možné přecházet mezi jednotlivými stavy po kliknutí na příslušná tlačítka. Např. registraci ve stavu \verb|POTVRZENA| můžeme po kliknutí na tlačítko "vyřadit" změnit na \verb|VYRAZENA| nebo po kliknutí na "potvrdit platbu" na \verb|ZAPLACENA|. Nejlépe vše popisuje následující stavový diagram.
 
 \begin{center}
 	\captionsetup{type=figure}
-	\includegraphics{img/prihlaska-stavy.png}
+	\includegraphics[width=10cm]{img/prihlaska-stavy.pdf}
 	\captionof{figure}{Stavy přihlášky}
 \end{center}
 
@@ -768,7 +761,7 @@ V seznamu registrací je možné přecházet mezi jednotlivými stavy po kliknut
     \textbf{Název} & Potvrzení/Odmítnutí/Vyřazení přihlášky
     \\ \hline
     
-	\textbf{ID} & UC5
+	\textbf{ID} & UC5a
 	\\ \hline
 	
 	\textbf{Popis} & V seznamu registrací je možné přecházet mezi stavy jednotlivých registrací. Nejlépe vše popisuje výše přiložený stavový diagram.
@@ -799,7 +792,7 @@ V seznamu registrací je možné přecházet mezi jednotlivými stavy po kliknut
     \vspace{-3.5mm}
     \begin{enumerate}
 		\itemsep0em 
-		\item Chyba při odeslání emailu (UC4.1)
+		\item Chyba při odeslání emailu
 	\end{enumerate}
     \\ \hline 
         
@@ -810,10 +803,9 @@ V seznamu registrací je možné přecházet mezi jednotlivými stavy po kliknut
 	\\ \hline		
     \end{tabular}
 	\end{center}	
-	\caption{Specifikace hlavního toku při změně stavu registrace - UC4}  
+	\caption{Specifikace hlavního toku změny stavu přihlášky - UC5a}  
 \end{table}
 
-Potvrzení platby je specifické tím, že krom změny stavu se ještě eviduje platba.
 
 \begin{table}[h!]
 	\begin{center}
@@ -822,7 +814,7 @@ Potvrzení platby je specifické tím, že krom změny stavu se ještě eviduje 
     \textbf{Název} & Potvrzení platby
     \\ \hline
     
-	\textbf{ID} & UC6
+	\textbf{ID} & UC5b
 	\\ \hline
 	
 	\textbf{Popis} & Potvrzení platby. Kurz může být zaplacen celý a nebo jen z části.
@@ -870,8 +862,8 @@ Potvrzení platby je specifické tím, že krom změny stavu se ještě eviduje 
     \vspace{-3.5mm}
     \begin{enumerate}
 		\itemsep0em 
-		\item Chyba při odeslání emailu (UC5.1)
-		\item Platba je větší, než-li zbývající částka (UC6.1)
+		\item Chyba při odeslání emailu
+		\item Platba je větší, než-li zbývající částka
 	\end{enumerate}
     \\ \hline 
         
@@ -882,8 +874,22 @@ Potvrzení platby je specifické tím, že krom změny stavu se ještě eviduje 
 	\\ \hline		
     \end{tabular}
 	\end{center}	
-	\caption{Specifikace hlavního toku Posílání upomínek o nezaplacení - UC4}  
+	\caption{Specifikace hlavního toku potvrzení platby - UC5b}  
 \end{table}
+
+\newpage
+
+\section{Volba frameworku}
+
+Framework pro realizaci architektury jsme zvolili Play! pro Javu (\href{http://www.playframework.com/}{http://www.playframework.com/}), který již v sobě zahrnuje šablonovací systém pro tvorbu jednotlivých Views a základní třídy pro Controller a Model.
+
+\section{Finální diagram tříd}
+		
+\begin{center}
+	\captionsetup{type=figure}
+	\includegraphics[height=22cm]{img/architektura-detail.pdf}
+	\captionof{figure}{Návrh finálního diagramu tříd}
+\end{center}	
 
 
 		% ----------- interakce  -----------
@@ -892,25 +898,25 @@ Potvrzení platby je specifické tím, že krom změny stavu se ještě eviduje 
 
 \begin{center}
 	\captionsetup{type=figure}
-	\includegraphics[width=17cm]{img/uzavreni-terminu.pdf}
-	\captionof{figure}{Sekvenční diagram UC Uzavření termínu}
+	\includegraphics[height=11cm]{img/uc1-pridat-termin.pdf}
+	\captionof{figure}{Sekvenční diagram UC1 Přidání termínu}
 \end{center}
 
 \begin{center}
 	\captionsetup{type=figure}
-	\includegraphics[width=17cm]{img/pridani-terminu.pdf}
-	\captionof{figure}{Sekvenční diagram UC Přidání termínu}
+	\includegraphics[height=10cm]{img/uc3-uzavrit-termin.pdf}
+	\captionof{figure}{Sekvenční diagram UC3 Uzavření termínu}
 \end{center}
 
 \begin{center}
 	\captionsetup{type=figure}
-	\includegraphics[width=17cm]{img/prihlaseni-na-termin-seq.pdf}
-	\captionof{figure}{Sekvenční diagram UC Příhlášení na termín}
+	\includegraphics[width=15.5cm]{img/uc2-prihlaseni-na-termin.pdf}
+	\captionof{figure}{Sekvenční diagram UC2 Příhlášení na termín}
 \end{center}
 
 \begin{center}
 	\captionsetup{type=figure}
-	\includegraphics[width=17cm]{img/prihlaseni-na-termin-com.pdf}
+	\includegraphics[width=15cm]{img/uc2-prihlaseni-na-termin-seq.pdf}
 	\captionof{figure}{Diagram komunikace UC Příhlášení na termín}
 \end{center}
 
@@ -920,7 +926,7 @@ Potvrzení platby je specifické tím, že krom změny stavu se ještě eviduje 
 
 \begin{center}
 	\captionsetup{type=figure}
-	\includegraphics[width=17cm]{img/frontend-obr.pdf}
+	\includegraphics[width=18cm]{img/frontend-obr.pdf}
 	\captionof{figure}{Interakce mezi obrazovkami - Front End / Klientská část}
 \end{center}
 
